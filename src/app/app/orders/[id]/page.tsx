@@ -50,7 +50,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
       <div className="min-h-screen bg-gradient-to-br from-bark-50 via-leaf-50 to-root-50 flex items-center justify-center">
         <div className="card-organic p-8 text-center">
           <h1 className="text-2xl font-serif text-bark-800 mb-4">Order Not Found</h1>
-          <p className="text-bark-600 mb-6">The order you're looking for doesn't exist.</p>
+          <p className="text-bark-600 mb-6">The order you're looking for does not exist.</p>
           <Link href="/app" className="btn-leaf">Back to Dashboard</Link>
         </div>
       </div>

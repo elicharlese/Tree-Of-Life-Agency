@@ -1,7 +1,7 @@
 import { Order, OrderItem, Developer } from '@/types/order'
 
 // Mock data storage - in production, this would be a database
-let orders: Order[] = []
+const orders: Order[] = []
 let orderCounter = 1
 
 export const services = [

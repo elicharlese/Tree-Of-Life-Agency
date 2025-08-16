@@ -28,7 +28,7 @@ export default function CRMDashboard() {
   const [metrics, setMetrics] = useState<CRMMetrics | null>(null)
   const [selectedView, setSelectedView] = useState<'overview' | 'customers' | 'leads' | 'deals' | 'pipeline'>('overview')
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
+  const [/*selectedCustomer*/, setSelectedCustomer] = useState<Customer | null>(null)
 
   useEffect(() => {
     setCustomers(getCustomers())
