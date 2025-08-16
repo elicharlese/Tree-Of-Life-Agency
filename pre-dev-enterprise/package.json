@@ -1,0 +1,14 @@
+{
+  "name": "@pre-dev-enterprise/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "dependencies": {
+    "react-ts": "2.0.3"
+  },
+  "devDependencies": {
+    "@nx/workspace": "21.4.0",
+    "nx": "21.4.0"
+  }
+}
