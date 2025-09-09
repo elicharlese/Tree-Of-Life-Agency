@@ -1,0 +1,375 @@
+// Tree of Life Agency - Database Schema
+// Prisma schema for service-selling marketplace with blockchain integration
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CLIENT
+  AGENT
+  ADMIN
+}
+
+enum ServiceCategory {
+  WEB_DEVELOPMENT
+  MOBILE_APP
+  CONSULTING
+}
+
+enum PricingModel {
+  FIXED_PRICE
+  HOURLY
+  SUBSCRIPTION
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  DISPUTED
+}
+
+enum EscrowStatus {
+  PENDING
+  FUNDED
+  RELEASED
+  REFUNDED
+  DISPUTED
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  APPROVED
+  REJECTED
+}
+
+// User management with wallet authentication
+model User {
+  id            String        @id @default(cuid())
+  walletAddress String        @unique
+  role          Role          @default(CLIENT)
+  email         String?       @unique
+  username      String?       @unique
+
+  // Profile information
+  profile       UserProfile?
+
+  // Relationships
+  services      Service[]     // Services offered (for agents)
+  orders        Order[]       // Orders placed (for clients)
+  reviews       Review[]      // Reviews received
+  reputation    Reputation?
+
+  // Timestamps
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("users")
+}
+
+// Extended user profile
+model UserProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  firstName   String?
+  lastName    String?
+  bio         String?
+  avatar      String?
+  location    String?
+  timezone    String?
+  website     String?
+  linkedin    String?
+  github      String?
+
+  // Agent-specific fields
+  skills      String[]
+  experience  Int?     // Years of experience
+  rate        Float?   // Hourly rate
+  portfolio   String[] // Portfolio URLs
+
+  // Verification
+  isVerified  Boolean  @default(false)
+  verifiedAt  DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("user_profiles")
+}
+
+// Service offerings
+model Service {
+  id          String         @id @default(cuid())
+  title       String
+  description String
+  category    ServiceCategory
+
+  // Pricing
+  pricing     PricingModel
+  basePrice   Float?         // For fixed price
+  hourlyRate  Float?         // For hourly
+  currency    String         @default("USD")
+
+  // Agent relationship
+  agentId     String
+  agent       User           @relation(fields: [agentId], references: [id])
+
+  // Service details
+  tags        String[]
+  portfolio   String[]       // Example work URLs
+  duration    Int?           // Estimated duration in days
+  isActive    Boolean        @default(true)
+
+  // Relationships
+  orders      Order[]
+  reviews     Review[]
+
+  // Metadata
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("services")
+}
+
+// Orders and transactions
+model Order {
+  id            String      @id @default(cuid())
+
+  // Parties
+  clientId      String
+  client        User        @relation(fields: [clientId], references: [id])
+  serviceId     String
+  service       Service     @relation(fields: [serviceId], references: [id])
+
+  // Order details
+  status        OrderStatus @default(PENDING)
+  title         String
+  description   String
+  requirements  String?
+
+  // Pricing
+  pricing       Pricing
+  totalAmount   Float
+
+  // Timeline
+  startedAt     DateTime?
+  completedAt   DateTime?
+  deadline      DateTime?
+
+  // Relationships
+  milestones    Milestone[]
+  escrow        Escrow?
+  reviews       Review[]
+
+  // Metadata
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("orders")
+}
+
+// Pricing details for orders
+model Pricing {
+  id        String       @id @default(cuid())
+  orderId   String       @unique
+  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  model     PricingModel
+  basePrice Float?
+  hourlyRate Float?
+  hours     Int?
+  currency  String       @default("USD")
+
+  // Subscription details (if applicable)
+  interval  String?      // monthly, yearly
+  duration  Int?         // Number of intervals
+
+  createdAt DateTime     @default(now())
+
+  @@map("pricing")
+}
+
+// Project milestones
+model Milestone {
+  id          String         @id @default(cuid())
+  orderId     String
+  order       Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  title       String
+  description String
+  status      MilestoneStatus @default(PENDING)
+
+  // Payment
+  amount      Float
+  dueDate     DateTime
+
+  // Progress
+  startedAt   DateTime?
+  completedAt DateTime?
+  approvedAt  DateTime?
+
+  // Deliverables
+  deliverables String[]      // File URLs or descriptions
+
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("milestones")
+}
+
+// Blockchain escrow system
+model Escrow {
+  id              String       @id @default(cuid())
+  orderId         String       @unique
+  order           Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  // Blockchain details
+  contractAddress String
+  chainId         Int          @default(1) // Ethereum mainnet
+  amount          Float
+  currency        String       @default("ETH")
+
+  // Status
+  status          EscrowStatus @default(PENDING)
+  fundedAt        DateTime?
+  releasedAt      DateTime?
+  refundedAt      DateTime?
+
+  // Transaction hashes
+  fundingTx       String?
+  releaseTx       String?
+  refundTx        String?
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("escrows")
+}
+
+// Review and rating system
+model Review {
+  id        String   @id @default(cuid())
+
+  // Review details
+  rating    Int      // 1-5 stars
+  comment   String?
+  isPublic  Boolean  @default(true)
+
+  // Relationships
+  reviewerId String
+  reviewer  User    @relation(fields: [reviewerId], references: [id])
+
+  // Can be for service or order
+  serviceId String?
+  service   Service? @relation(fields: [serviceId], references: [id])
+  orderId   String?
+  order     Order?   @relation(fields: [orderId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reviews")
+}
+
+// Decentralized reputation system
+model Reputation {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Reputation metrics
+  score     Float   @default(0)
+  reviews   Int     @default(0)
+  completed Int     @default(0)
+  disputed  Int     @default(0)
+
+  // Badges and achievements
+  badges    Badge[]
+
+  // On-chain reputation
+  contractAddress String?
+  tokenId   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reputations")
+}
+
+// Achievement badges
+model Badge {
+  id          String     @id @default(cuid())
+  reputationId String
+  reputation  Reputation @relation(fields: [reputationId], references: [id], onDelete: Cascade)
+
+  name        String
+  description String
+  icon        String?
+  earnedAt    DateTime   @default(now())
+
+  @@unique([reputationId, name])
+  @@map("badges")
+}
+
+// Analytics and metrics
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+
+  eventType String   // page_view, service_view, order_created, etc.
+  eventData Json?    // Additional event data
+
+  // Context
+  sessionId String?
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@map("analytics_events")
+}
+
+// System configuration
+model SystemConfig {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json
+
+  updatedAt DateTime @updatedAt
+
+  @@map("system_configs")
+}
+
+// File attachments
+model FileAttachment {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  url         String
+  uploadedBy  String
+  uploadedByUser User @relation(fields: [uploadedBy], references: [id])
+
+  // Optional associations
+  orderId     String?
+  order       Order?   @relation(fields: [orderId], references: [id])
+  milestoneId String?
+  milestone   Milestone? @relation(fields: [milestoneId], references: [id])
+
+  createdAt   DateTime @default(now())
+
+  @@map("file_attachments")
+}</target_file>

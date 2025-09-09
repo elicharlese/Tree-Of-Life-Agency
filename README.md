@@ -1,6 +1,8 @@
-# Tree of Life Agency Platform
+# Tree of Life Agency 🌳
 
-A modern development agency platform built with Next.js 14, TypeScript, and Tailwind CSS. Features a comprehensive CRM system, admin dashboard, and client management tools.
+**Live Demo:** [https://tree-of-life-agency.vercel.app](https://tree-of-life-agency.vercel.app)
+
+A comprehensive platform for managing development projects, client relationships, and business operations. Built with React, TypeScript, Next.js, and modern web technologies. Features a comprehensive CRM system, admin dashboard, and client management tools.
 
 ## 🌟 Features
 

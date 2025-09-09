@@ -1,0 +1,514 @@
+// Tree of Life Agency - Enhanced Database Schema
+// Combining CRM functionality with service-selling marketplace
+// Built on Solana blockchain
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  AGENT
+  CLIENT
+  DEVELOPER
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  REVOKED
+}
+
+enum AccessLevel {
+  PUBLIC      // Storefront access
+  RESTRICTED  // Requires invitation
+  INTERNAL    // Admin/Agent only
+}
+
+enum CustomerStatus {
+  ACTIVE
+  INACTIVE
+  PROSPECT
+  CHURNED
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LeadPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum OrderStatus {
+  DRAFT
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  OVERDUE
+}
+
+// Service marketplace enums
+enum ServiceCategory {
+  WEB_DEVELOPMENT
+  MOBILE_APP
+  CONSULTING
+}
+
+enum PricingModel {
+  FIXED_PRICE
+  HOURLY
+  SUBSCRIPTION
+}
+
+enum EscrowStatus {
+  PENDING
+  FUNDED
+  RELEASED
+  REFUNDED
+  DISPUTED
+}
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  passwordHash    String
+  role            UserRole @default(CLIENT)
+  firstName       String
+  lastName        String
+  phone           String?
+  avatar          String?
+  walletAddress   String?  @unique
+  isActive        Boolean  @default(true)
+  lastLoginAt     DateTime?
+  invitationId    String?  @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  invitation          Invitation?      @relation(fields: [invitationId], references: [id])
+  sentInvitations     Invitation[]     @relation("InvitationSender")
+  assignedCustomers   Customer[]       @relation("AssignedToUser")
+  assignedLeads       Lead[]           @relation("AssignedToUser")
+  createdOrders       Order[]          @relation("CreatedByUser")
+  assignedOrders      Order[]          @relation("AssignedToUser")
+  createdProjects     Project[]        @relation("CreatedByUser")
+  assignedProjects    Project[]        @relation("AssignedToUser")
+  assignedMilestones  Milestone[]      @relation("AssignedToUser")
+  activities          Activity[]       @relation("ActivityUser")
+  sentMessages        Message[]        @relation("MessageSender")
+  receivedMessages    Message[]        @relation("MessageReceiver")
+  uploadedFiles       FileAttachment[] @relation("UploadedByUser")
+  services            Service[]        @relation("ServiceAgent")
+  reputation          Reputation?      @relation("UserReputation")
+  analyticsEvents     AnalyticsEvent[] @relation("EventUser")
+
+  @@map("users")
+}
+
+model Invitation {
+  id          String           @id @default(cuid())
+  email       String
+  role        UserRole
+  status      InvitationStatus @default(PENDING)
+  token       String           @unique
+  expiresAt   DateTime
+  sentById    String
+  acceptedAt  DateTime?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  // Relations
+  sentBy      User  @relation("InvitationSender", fields: [sentById], references: [id])
+  user        User?
+
+  @@unique([email, status])
+  @@map("invitations")
+}
+
+// Enhanced Customer model with marketplace features
+model Customer {
+  id                String         @id @default(cuid())
+  name              String
+  email             String         @unique
+  phone             String?
+  company           String?
+  website           String?
+  industry          String?
+  companySize       String?
+  status            CustomerStatus @default(PROSPECT)
+  source            String?
+  assignedToId      String?
+  totalValue        Decimal        @default(0)
+  projectsCount     Int            @default(0)
+  lastContactDate   DateTime?
+  notes             String?
+  tags              String[]
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  // Address information
+  address           String?
+  city              String?
+  state             String?
+  zipCode           String?
+  country           String?
+
+  // Social profiles
+  linkedinUrl       String?
+  twitterUrl        String?
+  githubUrl         String?
+
+  // Stripe integration
+  stripeCustomerId  String?        @unique
+
+  // Relations
+  assignedTo        User?      @relation("AssignedToUser", fields: [assignedToId], references: [id])
+  services          Service[]  @relation("CustomerServices")
+  leads             Lead[]
+  orders            Order[]
+  projects          Project[]
+  activities        Activity[]
+  fileAttachments   FileAttachment[] @relation("CustomerFiles")
+
+  @@map("customers")
+}
+
+model Lead {
+  id                  String        @id @default(cuid())
+  name                String
+  email               String
+  phone               String?
+  company             String?
+  jobTitle            String?
+  source              String
+  status              LeadStatus    @default(NEW)
+  priority            LeadPriority  @default(MEDIUM)
+  score               Int           @default(0)
+  assignedToId        String?
+  customerId          String?
+  estimatedValue      Decimal?
+  expectedCloseDate   DateTime?
+  tags                String[]
+  notes               String?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  // Relations
+  assignedTo          User?         @relation("AssignedToUser", fields: [assignedToId], references: [id])
+  customer            Customer?     @relation(fields: [customerId], references: [id])
+  activities          Activity[]
+
+  @@map("leads")
+}
+
+// Enhanced Order model for marketplace
+model Order {
+  id                String      @id @default(cuid())
+  orderNumber       String      @unique
+  customerId        String
+  userId            String
+  assignedToId      String?
+  serviceId         String?
+  customerName      String
+  customerEmail     String
+  companyName       String?
+  projectName       String
+  description       String?
+  totalAmount       Decimal
+  estimatedTimeline String?
+  status            OrderStatus @default(DRAFT)
+  priority          LeadPriority @default(MEDIUM)
+  paidAt            DateTime?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  // Relations
+  customer          Customer    @relation(fields: [customerId], references: [id])
+  createdBy         User        @relation("CreatedByUser", fields: [userId], references: [id])
+  assignedTo        User?       @relation("AssignedToUser", fields: [assignedToId], references: [id])
+  service           Service?    @relation(fields: [serviceId], references: [id])
+  items             OrderItem[]
+  project           Project?
+  activities        Activity[]
+  fileAttachments   FileAttachment[]
+
+  // Marketplace relations
+  escrow            Escrow?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id            String   @id @default(cuid())
+  orderId       String
+  serviceId     String?
+  serviceName   String
+  price         Decimal
+  timeline      String?
+  features      String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+model Project {
+  id                String          @id @default(cuid())
+  name              String
+  description       String?
+  orderId           String          @unique
+  customerId        String
+  createdById       String
+  assignedToId      String?
+  status            ProjectStatus   @default(PLANNING)
+  techStack         String[]
+  estimatedHours    Int?
+  actualHours       Int             @default(0)
+  budget            Decimal?
+  startDate         DateTime?
+  endDate           DateTime?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  // Relations
+  order           Order       @relation(fields: [orderId], references: [id])
+  customer        Customer    @relation(fields: [customerId], references: [id])
+  createdBy       User        @relation("CreatedByUser", fields: [createdById], references: [id])
+  assignedTo      User?       @relation("AssignedToUser", fields: [assignedToId], references: [id])
+  milestones      Milestone[]
+  activities      Activity[]
+  fileAttachments FileAttachment[]
+
+  @@map("projects")
+}
+
+model Milestone {
+  id            String          @id @default(cuid())
+  title         String
+  description   String?
+  projectId     String
+  assignedToId  String
+  dueDate       DateTime
+  completedAt   DateTime?
+  status        MilestoneStatus @default(PENDING)
+  progress      Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  // Relations
+  project       Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignedTo    User            @relation("AssignedToUser", fields: [assignedToId], references: [id])
+  activities    Activity[]
+
+  @@map("milestones")
+}
+
+model Activity {
+  id            String    @id @default(cuid())
+  entityType    String    // "customer", "lead", "order", "project", "milestone"
+  entityId      String
+  type          String    // "call", "email", "meeting", "note", "status_change"
+  title         String
+  description   String?
+  userId        String
+  customerId    String?
+  leadId        String?
+  orderId       String?
+  projectId     String?
+  milestoneId   String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user          User      @relation("ActivityUser", fields: [userId], references: [id])
+  customer      Customer? @relation(fields: [customerId], references: [id])
+  lead          Lead?     @relation(fields: [leadId], references: [id])
+  order         Order?    @relation(fields: [orderId], references: [id])
+  project       Project?  @relation(fields: [projectId], references: [id])
+  milestone     Milestone? @relation(fields: [milestoneId], references: [id])
+
+  @@map("activities")
+}
+
+model Message {
+  id            String   @id @default(cuid())
+  senderId      String
+  receiverId    String
+  subject       String?
+  content       String
+  isRead        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  sender        User     @relation("MessageSender", fields: [senderId], references: [id])
+  receiver      User     @relation("MessageReceiver", fields: [receiverId], references: [id])
+
+  @@map("messages")
+}
+
+// Service Marketplace Models
+model Service {
+  id          String         @id @default(cuid())
+  title       String
+  description String
+  category    ServiceCategory
+
+  // Pricing
+  pricing     PricingModel
+  basePrice   Float?         // For fixed price
+  hourlyRate  Float?         // For hourly
+  currency    String         @default("SOL")
+
+  // Agent relationship
+  agentId     String
+  agent       User           @relation("ServiceAgent", fields: [agentId], references: [id])
+
+  // Service details
+  tags        String[]
+  portfolio   String[]       // Example work URLs
+  duration    Int?           // Estimated duration in days
+  isActive    Boolean        @default(true)
+
+  // Relations
+  orders          Order[]
+  customers       Customer[]  @relation("CustomerServices")
+
+  // Metadata
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("services")
+}
+
+// Solana escrow system
+model Escrow {
+  id              String       @id @default(cuid())
+  orderId         String       @unique
+  order           Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  // Solana details
+  programId       String       // Escrow program ID
+  escrowAccount   String       // PDA for escrow account
+  amount          Float
+  mint            String       // SOL or SPL token mint
+  chainId         Int          @default(101) // Solana mainnet
+
+  // Status
+  status          EscrowStatus @default(PENDING)
+  fundedAt        DateTime?
+  releasedAt      DateTime?
+  refundedAt      DateTime?
+
+  // Transaction signatures
+  fundingTx       String?
+  releaseTx       String?
+  refundTx        String?
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("escrows")
+}
+
+// Decentralized reputation system
+model Reputation {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  user      User    @relation("UserReputation", fields: [userId], references: [id], onDelete: Cascade)
+
+  // Reputation metrics
+  score     Float   @default(0)
+  reviews   Int     @default(0)
+  completed Int     @default(0)
+  disputed  Int     @default(0)
+
+  // On-chain reputation
+  nftMint  String? // Soul-bound NFT mint address
+  tokenId  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reputations")
+}
+
+// Analytics and metrics
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation("EventUser", fields: [userId], references: [id])
+
+  eventType String   // page_view, service_view, order_created, etc.
+  eventData Json?    // Additional event data
+
+  // Context
+  sessionId String?
+  walletAddress String? // Solana wallet address
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@map("analytics_events")
+}
+
+// File attachments
+model FileAttachment {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  url         String
+  uploadedBy  String
+  uploadedByUser User @relation("UploadedByUser", fields: [uploadedBy], references: [id])
+
+  // Relationships
+  customerId  String?
+  customer    Customer? @relation("CustomerFiles", fields: [customerId], references: [id])
+  orderId     String?
+  order       Order?   @relation(fields: [orderId], references: [id])
+  projectId   String?
+  project     Project? @relation(fields: [projectId], references: [id])
+
+  createdAt   DateTime @default(now())
+
+  @@map("file_attachments")
+}

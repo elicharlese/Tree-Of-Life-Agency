@@ -1,2 +1,28 @@
 node_modules
 .vercel
+
+/generated/prisma
+ 
+# Build outputs and caches
+.next/
+out/
+dist/
+.turbo/
+.cache/
+coverage/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# OS/Editor junk
+.DS_Store
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env files (keep .env committed if desired, ignore local overrides)
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
