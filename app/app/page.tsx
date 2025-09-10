@@ -3,9 +3,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
-  TreePine,
-  Search,
-  Filter,
   Clock,
   DollarSign,
   Users,
@@ -15,6 +12,9 @@ import {
   Eye
 } from 'lucide-react'
 import Link from 'next/link'
+import { Button } from '@/components/ui'
+import { PageHeader } from '@/components/layout/PageHeader'
+import { SearchFilter } from '@/components/layout/SearchFilter'
 import { getOrders } from '@/lib/orders'
 import { Order } from '@/types/order'
 
@@ -64,24 +64,25 @@ export default function CustomerDashboard() {
     }
   }
 
+  const filterOptions = [
+    { value: 'all', label: 'All Status' },
+    { value: 'pending', label: 'Pending' },
+    { value: 'in_progress', label: 'In Progress' },
+    { value: 'completed', label: 'Completed' },
+    { value: 'cancelled', label: 'Cancelled' }
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-bark-50 via-leaf-50 to-root-50">
-      {/* Header */}
-      <div className="bg-white/90 backdrop-blur-sm border-b border-bark-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <TreePine className="h-8 w-8 text-leaf-500 mr-3" />
-              <h1 className="text-2xl font-serif text-bark-800">My Orders</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/order" className="btn-leaf">
-                Place New Order
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageHeader 
+        title="My Orders"
+        showBackButton={false}
+        actionButton={{
+          label: "Place New Order",
+          href: "/order",
+          variant: "leaf"
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Overview */}
@@ -125,34 +126,14 @@ export default function CustomerDashboard() {
         </div>
 
         {/* Search and Filters */}
-        <div className="card-organic p-6 mb-8">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-3 h-5 w-5 text-bark-400" />
-              <input
-                type="text"
-                placeholder="Search orders..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="input-organic w-full pl-10"
-              />
-            </div>
-            <div className="flex items-center space-x-4">
-              <Filter className="h-5 w-5 text-bark-500" />
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="input-organic"
-              >
-                <option value="all">All Status</option>
-                <option value="pending">Pending</option>
-                <option value="in_progress">In Progress</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-          </div>
-        </div>
+        <SearchFilter
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          filterValue={statusFilter}
+          onFilterChange={setStatusFilter}
+          filterOptions={filterOptions}
+          placeholder="Search orders..."
+        />
 
         {/* Orders List */}
         <div className="space-y-6">
@@ -169,8 +150,8 @@ export default function CustomerDashboard() {
                 }
               </p>
               {orders.length === 0 && (
-                <Link href="/order" className="btn-leaf">
-                  Place Your First Order
+                <Link href="/order">
+                  <Button variant="leaf">Place Your First Order</Button>
                 </Link>
               )}
             </div>

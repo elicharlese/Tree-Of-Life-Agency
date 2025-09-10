@@ -212,7 +212,7 @@ export default function Home() {
                 <Leaf className="h-12 w-12 text-leaf-300 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Seedling Access</h3>
                 <p className="text-bark-100 mb-4">Begin your journey with basic knowledge sharing</p>
-                <button className="btn-leaf w-full">Start Growing</button>
+                <Link href="/access/seedling" className="btn-leaf w-full block text-center">Start Growing</Link>
               </div>
             </div>
             
@@ -221,7 +221,7 @@ export default function Home() {
                 <TreePine className="h-12 w-12 text-wisdom-300 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Branch Member</h3>
                 <p className="text-bark-100 mb-4">Full access to our collaborative knowledge base</p>
-                <button className="btn-wisdom w-full">Join Branch</button>
+                <Link href="/access/branch-member" className="btn-wisdom w-full block text-center">Join Branch</Link>
               </div>
             </div>
             
@@ -230,7 +230,7 @@ export default function Home() {
                 <Shield className="h-12 w-12 text-wisdom-200 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Elder Tree</h3>
                 <p className="text-bark-100 mb-4">Advanced insights and leadership opportunities</p>
-                <button className="btn-organic w-full">Ascend</button>
+                <Link href="/access/elder-tree" className="btn-organic w-full block text-center">Ascend</Link>
               </div>
             </div>
           </div>
@@ -273,12 +273,12 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Services</h3>
               <ul className="space-y-2">
-                <li><Link href="/services" className="text-bark-300 hover:text-leaf-400 transition-colors">Frontend Development</Link></li>
-                <li><Link href="/services" className="text-bark-300 hover:text-leaf-400 transition-colors">Backend Systems</Link></li>
-                <li><Link href="/services" className="text-bark-300 hover:text-leaf-400 transition-colors">Mobile Apps</Link></li>
-                <li><Link href="/services" className="text-bark-300 hover:text-leaf-400 transition-colors">UI/UX Design</Link></li>
-                <li><Link href="/services" className="text-bark-300 hover:text-leaf-400 transition-colors">DevOps</Link></li>
-                <li><Link href="/services" className="text-bark-300 hover:text-leaf-400 transition-colors">Business Strategy</Link></li>
+                <li><Link href="/services/frontend" className="text-bark-300 hover:text-leaf-400 transition-colors">Frontend Development</Link></li>
+                <li><Link href="/services/backend" className="text-bark-300 hover:text-leaf-400 transition-colors">Backend Systems</Link></li>
+                <li><Link href="/services/mobile" className="text-bark-300 hover:text-leaf-400 transition-colors">Mobile Apps</Link></li>
+                <li><Link href="/services/design" className="text-bark-300 hover:text-leaf-400 transition-colors">UI/UX Design</Link></li>
+                <li><Link href="/services/devops" className="text-bark-300 hover:text-leaf-400 transition-colors">DevOps</Link></li>
+                <li><Link href="/services/strategy" className="text-bark-300 hover:text-leaf-400 transition-colors">Business Strategy</Link></li>
               </ul>
             </div>
 
@@ -289,9 +289,9 @@ export default function Home() {
                 <li><Link href="/library" className="text-bark-300 hover:text-leaf-400 transition-colors">Knowledge Library</Link></li>
                 <li><Link href="/wisdom" className="text-bark-300 hover:text-leaf-400 transition-colors">Insights & Wisdom</Link></li>
                 <li><Link href="/collective" className="text-bark-300 hover:text-leaf-400 transition-colors">Meet Our Team</Link></li>
-                <li><Link href="#" className="text-bark-300 hover:text-leaf-400 transition-colors">Case Studies</Link></li>
-                <li><Link href="#" className="text-bark-300 hover:text-leaf-400 transition-colors">Blog</Link></li>
-                <li><Link href="#" className="text-bark-300 hover:text-leaf-400 transition-colors">Documentation</Link></li>
+                <li><Link href="/case-studies" className="text-bark-300 hover:text-leaf-400 transition-colors">Case Studies</Link></li>
+                <li><Link href="/blog" className="text-bark-300 hover:text-leaf-400 transition-colors">Blog</Link></li>
+                <li><Link href="/docs" className="text-bark-300 hover:text-leaf-400 transition-colors">Documentation</Link></li>
               </ul>
             </div>
 
@@ -299,11 +299,11 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Company</h3>
               <ul className="space-y-2">
-                <li><Link href="/collective" className="text-bark-300 hover:text-leaf-400 transition-colors">About Us</Link></li>
-                <li><Link href="#" className="text-bark-300 hover:text-leaf-400 transition-colors">Careers</Link></li>
-                <li><Link href="#" className="text-bark-300 hover:text-leaf-400 transition-colors">Contact</Link></li>
-                <li><Link href="#" className="text-bark-300 hover:text-leaf-400 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="#" className="text-bark-300 hover:text-leaf-400 transition-colors">Terms of Service</Link></li>
+                <li><Link href="/about" className="text-bark-300 hover:text-leaf-400 transition-colors">About Us</Link></li>
+                <li><Link href="/careers" className="text-bark-300 hover:text-leaf-400 transition-colors">Careers</Link></li>
+                <li><Link href="/contact" className="text-bark-300 hover:text-leaf-400 transition-colors">Contact</Link></li>
+                <li><Link href="/privacy" className="text-bark-300 hover:text-leaf-400 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="text-bark-300 hover:text-leaf-400 transition-colors">Terms of Service</Link></li>
                 <li><Link href="/auth/signin" className="text-bark-300 hover:text-leaf-400 transition-colors">Sign In</Link></li>
               </ul>
             </div>

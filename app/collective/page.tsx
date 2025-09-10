@@ -106,7 +106,7 @@ export default function Collective() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center text-bark-600 hover:text-leaf-600 mr-6">
                 <ArrowLeft className="mr-2 h-5 w-5" />
-                Back to Home
+                Home
               </Link>
               <div className="flex items-center">
                 <TreePine className="h-8 w-8 text-leaf-500 mr-3" />

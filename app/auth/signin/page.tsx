@@ -10,6 +10,7 @@ import {
   ArrowLeft
 } from 'lucide-react'
 import Link from 'next/link'
+import { Input } from '@/components/ui'
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)
@@ -42,12 +43,13 @@ export default function SignIn() {
               <label htmlFor="email" className="block text-sm font-medium text-bark-700 mb-2">
                 Email Address
               </label>
-              <input
+              <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input-organic"
+                variant="organic"
+                className="w-full"
                 placeholder="your.email@example.com"
                 required
               />
@@ -58,12 +60,13 @@ export default function SignIn() {
                 Password
               </label>
               <div className="relative">
-                <input
+                <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input-organic w-full"
+                  variant="organic"
+                  className="w-full pr-12"
                   placeholder="••••••••"
                   required
                 />

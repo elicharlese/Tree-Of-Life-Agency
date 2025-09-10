@@ -10,6 +10,7 @@ import {
   ArrowLeft
 } from 'lucide-react'
 import Link from 'next/link'
+import { Input } from '@/components/ui'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
@@ -44,12 +45,13 @@ export default function SignUp() {
               <label htmlFor="name" className="block text-sm font-medium text-bark-700 mb-2">
                 Full Name
               </label>
-              <input
+              <Input
                 id="name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input-organic"
+                variant="organic"
+                className="w-full"
                 placeholder="Your full name"
                 required
               />
@@ -59,12 +61,13 @@ export default function SignUp() {
               <label htmlFor="email" className="block text-sm font-medium text-bark-700 mb-2">
                 Email Address
               </label>
-              <input
+              <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input-organic"
+                variant="organic"
+                className="w-full"
                 placeholder="your.email@example.com"
                 required
               />
@@ -75,12 +78,13 @@ export default function SignUp() {
                 Password
               </label>
               <div className="relative">
-                <input
+                <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input-organic w-full"
+                  variant="organic"
+                  className="w-full pr-12"
                   placeholder="••••••••"
                   required
                 />
@@ -105,12 +109,13 @@ export default function SignUp() {
               <label htmlFor="confirm-password" className="block text-sm font-medium text-bark-700 mb-2">
                 Confirm Password
               </label>
-              <input
+              <Input
                 id="confirm-password"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="input-organic"
+                variant="organic"
+                className="w-full"
                 placeholder="••••••••"
                 required
               />
