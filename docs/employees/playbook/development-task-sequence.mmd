@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant TM as AI Task Manager
+    participant PM as AI Project Manager
+    participant Code as Internal Codebase
+    participant Motion
+    participant ClickUp
+
+    PM->>TM: Define development tasks
+    TM->>Code: Open issues / track PRs
+    Code-->>TM: Confirm PRs/issues created
+    TM->>Motion: Sync tasks & due dates
+    TM->>ClickUp: Update task boards for visibility
+    Motion-->>PM: Confirm all tasks synced

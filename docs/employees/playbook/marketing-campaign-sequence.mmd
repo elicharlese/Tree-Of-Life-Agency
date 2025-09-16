@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant EA as AI Executive Assistant
+    participant MK as AI Marketing Associate
+    participant PM as AI Project Manager
+    participant TM as AI Task Manager
+    participant ClickUp
+    participant Motion
+
+    EA->>MK: Forward new campaign objective
+    MK->>PM: Submit campaign plan draft
+    PM->>TM: Break down into deliverables
+    TM->>ClickUp: Create campaign tasks
+    TM->>Motion: Schedule deadlines & sync calendars
+    ClickUp-->>MK: Task board updated
+    Motion-->>EA: Timeline shared
+    MK->>EA: Campaign live update
+    EA->>PM: Report progress/status

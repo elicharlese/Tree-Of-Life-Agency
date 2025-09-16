@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant Customer
+    participant CS as AI Customer Service
+    participant MEET as AI Meeting Assistant
+    participant TM as AI Task Manager
+    participant PM as AI Project Manager
+    participant Motion
+
+    Customer->>CS: Submit issue (chat/email/call)
+    CS->>TM: Escalate if needs task resolution
+    TM->>Motion: Check availability/schedule support
+    Motion-->>TM: Return availability
+    TM->>PM: Notify if project impact
+    PM->>CS: Provide resolution pathway
+    CS->>Customer: Deliver solution/next steps
+    CS->>MEET: Schedule follow-up meeting (if needed)
+    MEET->>Customer: Send calendar invite

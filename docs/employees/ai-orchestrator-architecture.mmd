@@ -1,0 +1,56 @@
+graph TD
+  Orchestrator["AI Orchestrator / Controller"]
+
+  %% Core Motion System
+  Orchestrator --> MotionAPI["Motion API"]
+  MotionAPI --> Data["Projects / Tasks / Recurring / Schedules / Users"]
+
+  %% Management Roles
+  MotionAPI --> PM["AI Project Manager (1)"]
+  MotionAPI --> TM["AI Task Manager (1)"]
+  MotionAPI --> EA["AI Executive Assistant (1)"]
+
+  %% Sales & Marketing
+  MotionAPI --> SR["AI Sales Representatives (3)"]
+  MotionAPI --> MA["AI Marketing Associates (5)"]
+
+  %% Meetings & Support
+  MotionAPI --> Meet["AI Meeting Assistant (1)"]
+  MotionAPI --> CS["AI Customer Service (7)"]
+
+  %% Endpoints by role
+  PM --> P1["/projects/list"]
+  PM --> P2["/projects/create"]
+  PM --> P3["/projects/{id}"]
+  PM --> PM_Code["Integration: Codebase (link PRs to projects)"]
+  PM --> PM_ClickUp["Integration: ClickUp (mirror projects)"]
+
+  TM --> T1["/tasks/create"]
+  TM --> T2["/tasks/update"]
+  TM --> T3["/tasks/move"]
+  TM --> T4["/statuses/list"]
+  TM --> TM_Code["Integration: Codebase (track dev tasks)"]
+  TM --> TM_ClickUp["Integration: ClickUp (task sync)"]
+
+  EA --> E1["/schedules/get"]
+  EA --> E2["/users/me"]
+  EA --> EA_Code["Integration: Codebase (schedule deploys/reviews)"]
+  EA --> EA_ClickUp["Integration: ClickUp (meeting deadlines)"]
+
+  SR --> S1["/tasks/create (Leads)"]
+  SR --> S2["/projects/{id} (Pipelines)"]
+  SR --> SR_ClickUp["Integration: ClickUp (Sales reporting)"]
+
+  MA --> M1["/recurring-tasks/create"]
+  MA --> M2["/custom-fields"]
+  MA --> M3["/tasks/list (Campaign tracking)"]
+  MA --> MA_ClickUp["Integration: ClickUp (Marketing dashboards)"]
+
+  Meet --> Me1["/tasks/create (Action items)"]
+  Meet --> Me2["/projects/{id} (Meeting context)"]
+  Meet --> Meet_ClickUp["Integration: ClickUp (Meeting summaries)"]
+
+  CS --> C1["/tasks/create (Tickets)"]
+  CS --> C2["/tasks/unassign (Escalations)"]
+  CS --> C3["/tasks/move (Reassignments)"]
+  CS --> CS_ClickUp["Integration: ClickUp (Support queue mirror)"]

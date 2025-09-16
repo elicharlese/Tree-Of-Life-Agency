@@ -1,0 +1,122 @@
+---
+id: 96dba2e1-6ee6-4dde-8fb5-bc702a2c140c
+---
+%% master_playbook_swimlanes.mmd
+%% Horizontal Swimlane Layout for AI Employee Playbook
+
+%% Workflow lanes: Client Onboarding | Customer Support | Marketing | Meetings | Dev/Codebase | Sales Pipeline
+%% Color coding: Motion API (blue), ClickUp (purple), Codebase (green)
+%% Role shading: Management, Ops, Sales, Marketing
+
+flowchart LR
+    %% === Swimlane: Client Onboarding ===
+    subgraph Onboarding["Client Onboarding"]
+        Client[Client]:::client
+        SR1[AI Sales Rep 1]:::sales
+        EA[AI Executive Assistant]:::mgmt
+        PM[AI Project Manager]:::mgmt
+        TM[AI Task Manager]:::mgmt
+        ClickUp1[ClickUp]:::clickup
+        Motion1[Motion API]:::motion
+        Client --> SR1
+        SR1 --> EA
+        EA --> PM
+        PM --> TM
+        TM --> ClickUp1
+        TM --> Motion1
+        Motion1 --> PM
+        PM --> SR1
+        SR1 --> Client
+    end
+
+    %% === Swimlane: Customer Support ===
+    subgraph Support["Customer Support"]
+        Customer[Customer]:::client
+        CS1[AI Customer Service 1]:::ops
+        MEET1[AI Meeting Assistant]:::ops
+        TM2[AI Task Manager]:::mgmt
+        PM2[AI Project Manager]:::mgmt
+        Motion2[Motion API]:::motion
+        Customer --> CS1
+        CS1 --> TM2
+        TM2 --> Motion2
+        Motion2 --> TM2
+        TM2 --> PM2
+        PM2 --> CS1
+        CS1 --> Customer
+        CS1 --> MEET1
+        MEET1 --> Customer
+    end
+
+    %% === Swimlane: Marketing Campaign ===
+    subgraph MarketingWF["Marketing Campaign"]
+        EA2[AI Executive Assistant]:::mgmt
+        MK1[AI Marketing Associate 1]:::marketing
+        PM3[AI Project Manager]:::mgmt
+        TM3[AI Task Manager]:::mgmt
+        ClickUp2[ClickUp]:::clickup
+        Motion3[Motion API]:::motion
+        EA2 --> MK1
+        MK1 --> PM3
+        PM3 --> TM3
+        TM3 --> ClickUp2
+        TM3 --> Motion3
+        Motion3 --> EA2
+        MK1 --> EA2
+        EA2 --> PM3
+    end
+
+    %% === Swimlane: Internal Meetings ===
+    subgraph Meetings["Internal Meetings"]
+        MEET2[AI Meeting Assistant]:::ops
+        TM4[AI Task Manager]:::mgmt
+        PM4[AI Project Manager]:::mgmt
+        EA3[AI Executive Assistant]:::mgmt
+        Motion4[Motion API]:::motion
+        MEET2 --> Motion4
+        MEET2 --> TM4
+        TM4 --> PM4
+        TM4 --> Motion4
+        Motion4 --> EA3
+        EA3 --> MEET2
+    end
+
+    %% === Swimlane: Development / Codebase ===
+    subgraph Development["Dev / Codebase Workflow"]
+        PM5[AI Project Manager]:::mgmt
+        TM5[AI Task Manager]:::mgmt
+        Codebase1[Codebase]:::codebase
+        Motion5[Motion API]:::motion
+        ClickUp3[ClickUp]:::clickup
+        PM5 --> TM5
+        TM5 --> Codebase1
+        Codebase1 --> TM5
+        TM5 --> Motion5
+        TM5 --> ClickUp3
+        Motion5 --> PM5
+    end
+
+    %% === Swimlane: Sales / Customer Pipeline ===
+    subgraph SalesWF["Sales / Customer Pipeline"]
+        SR2[AI Sales Rep 1]:::sales
+        MK2[AI Marketing Associate 1]:::marketing
+        PM6[AI Project Manager]:::mgmt
+        Motion6[Motion API]:::motion
+        ClickUp4[ClickUp]:::clickup
+        SR2 --> Motion6
+        MK2 --> Motion6
+        PM6 --> ClickUp4
+        Motion6 --> ClickUp4
+        PM6 --> SR2
+        PM6 --> MK2
+    end
+
+    %% === Class Definitions ===
+    classDef motion fill:#cce5ff,stroke:#3399ff,stroke-width:2px
+    classDef clickup fill:#e6ccff,stroke:#9933ff,stroke-width:2px
+    classDef codebase fill:#ccffcc,stroke:#33cc33,stroke-width:2px
+    classDef mgmt fill:#f2f2f2,stroke:#999,stroke-width:1px
+    classDef ops fill:#fff0f0,stroke:#cc6666,stroke-width:1px
+    classDef sales fill:#f0fff0,stroke:#66cc66,stroke-width:1px
+    classDef marketing fill:#fff8e6,stroke:#ffaa33,stroke-width:1px
+    classDef client fill:#ffe6cc,stroke:#ff9933,stroke-width:2px

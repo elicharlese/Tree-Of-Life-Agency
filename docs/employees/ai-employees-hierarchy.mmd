@@ -1,0 +1,62 @@
+flowchart TD
+
+    %% Core System
+    A[Motion API] --- B[ClickUp API]
+    A --- C[Internal Codebase]
+
+    %% AI Employees
+    subgraph Exec[Executive & Management Layer]
+        PM[AI Project Manager]
+        TM[AI Task Manager]
+        EA[AI Executive Assistant]
+    end
+
+    subgraph Ops[Operations Layer]
+        MEET[AI Meeting Assistant]
+        CS1[AI Customer Service 1]
+        CS2[AI Customer Service 2]
+        CS3[AI Customer Service 3]
+        CS4[AI Customer Service 4]
+        CS5[AI Customer Service 5]
+        CS6[AI Customer Service 6]
+        CS7[AI Customer Service 7]
+    end
+
+    subgraph Sales[Sales Layer]
+        SR1[AI Sales Rep 1]
+        SR2[AI Sales Rep 2]
+        SR3[AI Sales Rep 3]
+    end
+
+    subgraph Marketing[Marketing Layer]
+        MK1[AI Marketing Associate 1]
+        MK2[AI Marketing Associate 2]
+        MK3[AI Marketing Associate 3]
+        MK4[AI Marketing Associate 4]
+        MK5[AI Marketing Associate 5]
+    end
+
+    %% Connections
+    A --> PM
+    A --> TM
+    A --> EA
+    A --> MEET
+    A --> CS1 & CS2 & CS3 & CS4 & CS5 & CS6 & CS7
+    A --> SR1 & SR2 & SR3
+    A --> MK1 & MK2 & MK3 & MK4 & MK5
+
+    B --> PM
+    B --> TM
+    B --> EA
+
+    C --> PM
+    C --> TM
+    C --> EA
+
+    %% Hierarchy
+    PM --> TM
+    PM --> EA
+    TM --> MEET
+    TM --> CS1 & CS2 & CS3 & CS4 & CS5 & CS6 & CS7
+    EA --> SR1 & SR2 & SR3
+    EA --> MK1 & MK2 & MK3 & MK4 & MK5

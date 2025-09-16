@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant MEET as AI Meeting Assistant
+    participant TM as AI Task Manager
+    participant PM as AI Project Manager
+    participant EA as AI Executive Assistant
+    participant Motion
+
+    MEET->>Motion: Capture meeting action items
+    MEET->>TM: Submit tasks for assignment
+    TM->>PM: Verify critical project items
+    TM->>Motion: Schedule tasks & deadlines
+    Motion-->>EA: Meeting summary & calendar updates
+    EA->>All: Distribute follow-up notes

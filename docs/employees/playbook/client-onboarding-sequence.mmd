@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant Client
+    participant SR as AI Sales Rep
+    participant EA as AI Executive Assistant
+    participant PM as AI Project Manager
+    participant TM as AI Task Manager
+    participant ClickUp
+    participant Motion
+
+    Client->>SR: Submit new request
+    SR->>EA: Share client details + proposal
+    EA->>PM: Forward approved client details
+    PM->>TM: Assign project tasks
+    TM->>ClickUp: Create tasks in ClickUp
+    TM->>Motion: Sync scheduling via Motion API
+    ClickUp-->>PM: Confirm tasks created
+    Motion-->>TM: Confirm schedule created
+    PM->>SR: Provide kickoff details
+    SR->>Client: Send onboarding & timeline

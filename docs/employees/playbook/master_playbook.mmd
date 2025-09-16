@@ -1,0 +1,115 @@
+%% master_playbook.mmd
+flowchart TD
+    %% Core APIs
+    MotionAPI[Motion API]
+    ClickUp[ClickUp API]
+    Codebase[Internal Codebase]
+
+    %% AI Employees
+    subgraph Exec[Executive & Management Layer]
+        PM[AI Project Manager]
+        TM[AI Task Manager]
+        EA[AI Executive Assistant]
+    end
+
+    subgraph Ops[Operations Layer]
+        MEET[AI Meeting Assistant]
+        CS1[AI Customer Service 1]
+        CS2[AI Customer Service 2]
+        CS3[AI Customer Service 3]
+        CS4[AI Customer Service 4]
+        CS5[AI Customer Service 5]
+        CS6[AI Customer Service 6]
+        CS7[AI Customer Service 7]
+    end
+
+    subgraph Sales[Sales Layer]
+        SR1[AI Sales Rep 1]
+        SR2[AI Sales Rep 2]
+        SR3[AI Sales Rep 3]
+    end
+
+    subgraph Marketing[Marketing Layer]
+        MK1[AI Marketing Associate 1]
+        MK2[AI Marketing Associate 2]
+        MK3[AI Marketing Associate 3]
+        MK4[AI Marketing Associate 4]
+        MK5[AI Marketing Associate 5]
+    end
+
+    %% Core connections
+    MotionAPI --- PM
+    MotionAPI --- TM
+    MotionAPI --- EA
+    MotionAPI --- MEET
+    MotionAPI --- CS1 & CS2 & CS3 & CS4 & CS5 & CS6 & CS7
+    MotionAPI --- SR1 & SR2 & SR3
+    MotionAPI --- MK1 & MK2 & MK3 & MK4 & MK5
+
+    ClickUp --- PM
+    ClickUp --- TM
+    ClickUp --- EA
+    ClickUp --- SR1 & SR2 & SR3
+    ClickUp --- MK1 & MK2 & MK3 & MK4 & MK5
+    ClickUp --- MEET
+    ClickUp --- CS1 & CS2 & CS3 & CS4 & CS5 & CS6 & CS7
+
+    Codebase --- PM
+    Codebase --- TM
+    Codebase --- EA
+
+    %% Workflows
+    %% 1. Client Onboarding
+    Client[Client] --> SR1: Submit Request
+    SR1 --> EA: Share Details
+    EA --> PM: Forward Approved Request
+    PM --> TM: Assign Tasks
+    TM --> ClickUp: Create Tasks
+    TM --> MotionAPI: Sync Schedule
+    MotionAPI --> PM: Confirm Tasks
+    PM --> SR1: Kickoff Details
+    SR1 --> Client: Send Timeline
+
+    %% 2. Customer Support
+    Customer[Customer] --> CS1: Submit Issue
+    CS1 --> TM: Escalate
+    TM --> MotionAPI: Check Schedule
+    MotionAPI --> TM: Availability
+    TM --> PM: Notify
+    PM --> CS1: Provide Resolution
+    CS1 --> Customer: Deliver Solution
+    CS1 --> MEET: Schedule Follow-up
+    MEET --> Customer: Send Invite
+
+    %% 3. Marketing Campaign
+    EA --> MK1: Forward Campaign Objective
+    MK1 --> PM: Submit Draft
+    PM --> TM: Breakdown Tasks
+    TM --> ClickUp: Create Campaign Tasks
+    TM --> MotionAPI: Schedule Deadlines
+    MotionAPI --> EA: Timeline Shared
+    MK1 --> EA: Campaign Updates
+    EA --> PM: Report Progress
+
+    %% 4. Internal Meeting
+    MEET --> MotionAPI: Capture Action Items
+    MEET --> TM: Submit Tasks
+    TM --> PM: Verify Critical Items
+    TM --> MotionAPI: Schedule Tasks
+    MotionAPI --> EA: Meeting Summary
+    EA --> All: Distribute Notes
+
+    %% 5. Development / Codebase
+    PM --> TM: Define Dev Tasks
+    TM --> Codebase: Open Issues / Track PRs
+    Codebase --> TM: Confirm PRs/Issues
+    TM --> MotionAPI: Sync Tasks & Deadlines
+    TM --> ClickUp: Update Boards
+    MotionAPI --> PM: Confirm Sync
+
+    %% 6. Sales / Customer Pipeline
+    SR1 --> MotionAPI: Log New Leads
+    MK1 --> MotionAPI: Track Campaign Responses
+    PM --> ClickUp: Review Dashboard
+    MotionAPI --> ClickUp: Sync Tasks/Status
+    PM --> SR1 & MK1: Feedback

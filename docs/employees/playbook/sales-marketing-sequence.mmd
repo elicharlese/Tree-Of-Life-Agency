@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant SR as AI Sales Rep
+    participant MA as AI Marketing Associate
+    participant PM as AI Project Manager
+    participant ClickUp
+    participant Motion
+
+    SR->>Motion: Log new leads
+    MA->>Motion: Track campaign response
+    PM->>ClickUp: Review pipeline dashboard
+    Motion-->>ClickUp: Sync tasks/status updates
+    PM->>SR & MA: Feedback on leads/campaigns
