@@ -1,0 +1,26 @@
+name: Capture UI Screenshots
+
+on:
+  deployment_status:
+    types: [success]
+
+jobs:
+  capture-screenshots:
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run screenshot capture
+        run: npx ts-node ui/capture-screenshots.ts
+        env:
+          VERCEL_URL: ${{ github.event.deployment_status.environment_url }}
