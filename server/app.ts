@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 // Load environment variables
@@ -21,8 +20,16 @@ import invitationRoutes from './routes/invitations';
 import paymentRoutes from './routes/payments';
 
 // Import middleware
-import { errorHandler } from './middleware/errorHandler';
-import { notFound } from './middleware/notFound';
+import {
+  errorHandler,
+  notFound,
+  developmentLogger,
+  productionLogger,
+  securityLogger,
+  requestId,
+  performanceLogger,
+  cache
+} from './middleware';
 import { generalLimiter, authLimiter, paymentLimiter } from './middleware/rateLimiter';
 
 const app = express();
@@ -38,8 +45,13 @@ app.use(cors({
   credentials: true
 }));
 
+// Request ID and performance tracking
+app.use(requestId);
+app.use(performanceLogger);
+
 // Logging middleware
-app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+app.use(process.env.NODE_ENV === 'production' ? productionLogger : developmentLogger);
+app.use(securityLogger);
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
@@ -74,17 +86,17 @@ app.get('/health', async (req, res) => {
 // Apply rate limiting
 app.use('/api/v1', generalLimiter);
 
-// API Routes with specific rate limiting
+// API Routes with specific rate limiting and caching
 app.use('/api/v1/auth', authLimiter, authRoutes);
 app.use('/api/v1/invitations', invitationRoutes);
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/customers', customerRoutes);
+app.use('/api/v1/customers', cache(300), customerRoutes); // Cache customer data for 5 minutes
 app.use('/api/v1/leads', leadRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/order-processing', orderProcessingRoutes);
-app.use('/api/v1/projects', projectRoutes);
+app.use('/api/v1/projects', cache(600), projectRoutes); // Cache project data for 10 minutes
 app.use('/api/v1/activities', activityRoutes);
-app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/services', cache(1800), serviceRoutes); // Cache service data for 30 minutes
 app.use('/api/v1/payments', paymentLimiter, paymentRoutes);
 
 // 404 handler
