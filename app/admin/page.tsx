@@ -9,8 +9,7 @@ import {
   FileText,
   Calendar
 } from 'lucide-react'
-import { getOrders, developers } from '../../../libs/shared-utils/orders'
-import { Order } from '@/libs/shared-utilss/shared-types/order'
+import { getOrders, developers, Order } from '../../libs/shared-utils/orders'
 
 export default function AdminDashboard() {
   const [orders, setOrders] = useState<Order[]>([])

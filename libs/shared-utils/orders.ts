@@ -2,19 +2,33 @@
 export interface Order {
   id: string;
   customerId: string;
-  status: 'pending' | 'in-progress' | 'completed' | 'cancelled';
+  status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
   items: OrderItem[];
   total: number;
+  totalAmount?: number;
   createdAt: Date;
   updatedAt: Date;
+  projectName?: string;
+  customerName?: string;
+  description?: string;
+  estimatedTimeline?: string;
+  milestones?: any[];
+  customerEmail?: string;
+  companyName?: string;
+  priority?: string;
+  assignedDevelopers?: string[];
+  techStack?: string[];
 }
 
 export interface OrderItem {
   id: string;
   serviceId: string;
   name: string;
+  serviceName?: string;
   price: number;
   timeline: string;
+  features?: string[];
+  customizations?: any[];
 }
 
 export interface Developer {
