@@ -10,7 +10,7 @@ import {
   Clock,
   User
 } from 'lucide-react'
-import { Activity } from '@/types/crm'
+import { Activity } from '@/libs/shared-types/crm'
 import { getActivities } from '@/lib/crm'
 
 interface ActivityFeedProps {

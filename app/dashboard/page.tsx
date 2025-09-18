@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiClient } from '@/lib/api-client';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Alert } from '@/components/ui/Alert';
+import { Card, CardHeader, CardTitle, CardContent } from '@/libs/shared-ui/components/Card';
+import { Button } from '@/libs/shared-ui/components/Button';
+import { Alert } from '@/libs/shared-ui/components/Alert';
 import {
   Users,
   UserPlus,

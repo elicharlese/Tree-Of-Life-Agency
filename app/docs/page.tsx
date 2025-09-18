@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { PageHeader } from '@/components/layout/PageHeader'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/libs/shared-ui/components'
 
 export default function DocsPage() {
   return (

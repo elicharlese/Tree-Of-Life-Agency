@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { ArrowLeft, TreePine } from 'lucide-react'
-import { Button } from '@/components/ui'
+import { Button } from '@/libs/shared-ui/components'
 
 interface PageHeaderProps {
   title: string

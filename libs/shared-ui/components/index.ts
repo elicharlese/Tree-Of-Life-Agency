@@ -1,35 +1,11 @@
-// Shared UI Components Library
-// Following Windsurf Global Rules - Tailwind-based design system
+// Centralized UI Component Library Export
+export { Button } from './button-variants'
+export { Input } from './input-variants'
+export { Select } from './select'
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card-variants'
 
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
-
-export { Input } from './Input';
-export type { InputProps } from './Input';
-
-export { Card, CardHeader, CardTitle, CardContent, CardFooter } from './Card';
-export type { CardProps, CardHeaderProps, CardTitleProps, CardContentProps, CardFooterProps } from './Card';
-
-export { Alert } from './Alert';
-export type { AlertProps } from './Alert';
-
-export { Badge } from './Badge';
-export type { BadgeProps } from './Badge';
-
-export { Modal } from './Modal';
-export type { ModalProps } from './Modal';
-
-export { Table, TableHeader, TableBody, TableRow, TableCell } from './Table';
-export type { TableProps } from './Table';
-
-export { Spinner } from './Spinner';
-export type { SpinnerProps } from './Spinner';
-
-export { Tooltip } from './Tooltip';
-export type { TooltipProps } from './Tooltip';
-
-export { Dropdown } from './Dropdown';
-export type { DropdownProps } from './Dropdown';
-
-export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
-export type { TabsProps } from './Tabs';
+// Legacy exports for backward compatibility
+export { Button as LegacyButton } from './Button'
+export { Input as LegacyInput } from './input'
+export { Card as LegacyCard } from './card'
+export { Label } from './label'

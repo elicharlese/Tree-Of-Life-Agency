@@ -1,4 +1,4 @@
-import { Customer, Lead, Deal, Activity, CRMMetrics } from '@/types/crm'
+import { Customer, Lead, Deal, Activity, CRMMetrics } from '@/libs/shared-types/crm'
 
 // Mock data for demonstration
 export const mockCustomers: Customer[] = [

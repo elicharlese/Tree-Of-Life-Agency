@@ -10,7 +10,7 @@ import {
   Plus,
   Target
 } from 'lucide-react'
-import { Deal } from '@/types/crm'
+import { Deal } from '@/libs/shared-types/crm'
 import { getPipelineData } from '@/lib/crm'
 
 interface PipelineBoardProps {

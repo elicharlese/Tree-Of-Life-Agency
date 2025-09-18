@@ -28,7 +28,7 @@
     "db:seed": "ts-node prisma/seed.ts",
     "audit:security": "npm audit --audit-level=high",
     "audit:fix": "npm audit fix",
-    "screenshots": "ts-node ui/capture-screenshots.ts"
+    "screenshots": "ts-node scripts/capture-screenshots.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.0",

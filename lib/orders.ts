@@ -1,4 +1,4 @@
-import { Order, OrderItem, Developer } from '@/types/order'
+import { Order, OrderItem, Developer } from '@/libs/shared-types/order'
 
 // Mock data storage - in production, this would be a database
 const orders: Order[] = []

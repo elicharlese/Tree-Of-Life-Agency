@@ -12,11 +12,11 @@ import {
   Eye
 } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '@/components/ui'
+import { Button } from '@/libs/shared-ui/components'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { SearchFilter } from '@/components/layout/SearchFilter'
 import { getOrders } from '@/lib/orders'
-import { Order } from '@/types/order'
+import { Order } from '@/libs/shared-types/order'
 
 export default function CustomerDashboard() {
   const [orders, setOrders] = useState<Order[]>([])

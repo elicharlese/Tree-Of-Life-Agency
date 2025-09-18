@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { PageHeader } from '@/components/layout/PageHeader'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button } from '@/components/ui'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button } from '@/libs/shared-ui/components'
 
 export default function CareersPage() {
   return (

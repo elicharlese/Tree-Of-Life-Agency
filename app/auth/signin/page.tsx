@@ -10,7 +10,7 @@ import {
   ArrowLeft
 } from 'lucide-react'
 import Link from 'next/link'
-import { Input } from '@/components/ui'
+import { Input } from '@/libs/shared-ui/components'
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)

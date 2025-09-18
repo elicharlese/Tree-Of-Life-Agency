@@ -18,7 +18,7 @@ import {
   Tag
 } from 'lucide-react'
 import { getCustomers, getLeads, getDeals, getCRMMetrics } from '@/lib/crm'
-import { Customer, Lead, Deal, CRMMetrics } from '@/types/crm'
+import { Customer, Lead, Deal, CRMMetrics } from '@/libs/shared-types/crm'
 import PipelineBoard from '@/components/PipelineBoard'
 
 export default function CRMDashboard() {

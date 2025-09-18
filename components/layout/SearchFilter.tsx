@@ -1,6 +1,6 @@
 import React from 'react'
 import { Search, Filter } from 'lucide-react'
-import { Input, Select, Card } from '@/components/ui'
+import { Input, Select, Card } from '@/libs/shared-ui/components'
 
 interface SearchFilterProps {
   searchQuery: string

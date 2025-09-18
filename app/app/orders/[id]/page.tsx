@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { getOrderById } from '@/lib/orders'
-import { Order } from '@/types/order'
+import { Order } from '@/libs/shared-types/order'
 
 interface OrderDetailPageProps {
   params: { id: string }

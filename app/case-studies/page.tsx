@@ -1,7 +1,7 @@
 'use client'
 
 import { PageHeader } from '@/components/layout/PageHeader'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/libs/shared-ui/components'
 
 export default function CaseStudiesPage() {
   return (

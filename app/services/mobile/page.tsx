@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Smartphone, CheckCircle } from 'lucide-react'
 import { PageHeader } from '@/components/layout/PageHeader'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from '@/components/ui'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from '@/libs/shared-ui/components'
 
 export default function MobilePage() {
   return (
