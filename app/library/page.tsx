@@ -4,13 +4,11 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
   BookOpen, 
+  Bookmark, 
   Search, 
-  Filter,
-  TreePine,
   ArrowLeft,
-  Users,
-  Clock,
-  Star
+  Calendar,
+  Eye
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -83,7 +81,6 @@ export default function Library() {
                 Home
               </Link>
               <div className="flex items-center">
-                <TreePine className="h-8 w-8 text-leaf-500 mr-3" />
                 <h1 className="text-2xl font-serif text-bark-800">Knowledge Library</h1>
               </div>
             </div>

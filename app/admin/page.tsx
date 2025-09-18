@@ -109,7 +109,6 @@ export default function AdminDashboard() {
         <div className="max-w-full px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <TreePine className="h-8 w-8 text-leaf-500" />
               <h1 className="text-xl font-bold">Tree of Life Agency</h1>
               <div className="flex items-center space-x-2 ml-8">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>

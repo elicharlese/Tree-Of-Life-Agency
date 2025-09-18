@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { 
   ArrowLeft,
-  TreePine,
   Clock,
   Users,
   CheckCircle,
@@ -94,7 +93,6 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                 Back to Dashboard
               </Link>
               <div className="flex items-center">
-                <TreePine className="h-8 w-8 text-leaf-500 mr-3" />
                 <h1 className="text-2xl font-serif text-bark-800">Order Details</h1>
               </div>
             </div>

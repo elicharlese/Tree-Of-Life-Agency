@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { ArrowLeft, TreePine } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { Button } from '../Button'
 
 interface PageHeaderProps {
@@ -33,7 +33,6 @@ export function PageHeader({
               </Link>
             )}
             <div className="flex items-center">
-              <TreePine className="h-8 w-8 text-leaf-500 mr-3" />
               <h1 className="text-2xl font-serif text-bark-800">{title}</h1>
             </div>
           </div>
@@ -60,3 +59,4 @@ export function PageHeader({
     </div>
   )
 }
+

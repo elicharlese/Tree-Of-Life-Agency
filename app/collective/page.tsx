@@ -7,7 +7,6 @@ import {
   MapPin, 
   Calendar,
   ArrowLeft,
-  TreePine,
   Github,
   Linkedin,
   Mail,
@@ -109,7 +108,6 @@ export default function Collective() {
                 Home
               </Link>
               <div className="flex items-center">
-                <TreePine className="h-8 w-8 text-leaf-500 mr-3" />
                 <h1 className="text-2xl font-serif text-bark-800">Our Collective</h1>
               </div>
             </div>

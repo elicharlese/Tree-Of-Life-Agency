@@ -9,7 +9,6 @@ import {
   Cloud,
   BarChart3,
   ArrowLeft,
-  TreePine,
   CheckCircle,
   Clock
 } from 'lucide-react'
@@ -85,7 +84,6 @@ export default function Services() {
                 Home
               </Link>
               <div className="flex items-center">
-                <TreePine className="h-8 w-8 text-leaf-500 mr-3" />
                 <h1 className="text-2xl font-serif text-bark-800">Our Services</h1>
               </div>
             </div>

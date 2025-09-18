@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
   ArrowLeft,
-  TreePine,
   Plus,
   Minus,
   Check,
@@ -129,7 +128,6 @@ export default function OrderPage() {
                 Back to Services
               </Link>
               <div className="flex items-center">
-                <TreePine className="h-8 w-8 text-leaf-500 mr-3" />
                 <h1 className="text-2xl font-serif text-bark-800">Place Your Order</h1>
               </div>
             </div>
