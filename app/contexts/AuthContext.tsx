@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { apiClient } from '@/lib/api-client';
+import { apiClient } from '@/libs/shared-utils/api-client';
 
 export interface User {
   id: string;

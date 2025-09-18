@@ -15,8 +15,8 @@ import {
   FileText
 } from 'lucide-react'
 import Link from 'next/link'
-import { services, createOrder, calculateOrderTotal, estimateTimeline } from '@/lib/orders'
-import { OrderItem } from '@/libs/shared-types/order'
+import { services, createOrder, calculateOrderTotal, estimateTimeline } from '@/libs/shared-utils/orders'
+import { OrderItem } from '@/libs/shared-utilss/shared-types/order'
 
 export default function OrderPage() {
   const [selectedServices, setSelectedServices] = useState<OrderItem[]>([])

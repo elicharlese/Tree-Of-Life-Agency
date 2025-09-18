@@ -17,9 +17,9 @@ import {
   Building,
   Tag
 } from 'lucide-react'
-import { getCustomers, getLeads, getDeals, getCRMMetrics } from '@/lib/crm'
-import { Customer, Lead, Deal, CRMMetrics } from '@/libs/shared-types/crm'
-import PipelineBoard from '@/components/PipelineBoard'
+import { getCustomers, getLeads, getDeals, getCRMMetrics } from '@/libs/shared-utils/crm'
+import { Customer, Lead, Deal, CRMMetrics } from '@/libs/shared-utilss/shared-types/crm'
+import PipelineBoard from '@/libs/shared-ui/components/PipelineBoard'
 
 export default function CRMDashboard() {
   const [customers, setCustomers] = useState<Customer[]>([])

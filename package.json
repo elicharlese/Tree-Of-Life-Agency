@@ -5,7 +5,7 @@
   "description": "Tree of Life Agency Platform - Internal development collaboration tool",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "prisma generate --schema=./libs/shared-database/prisma/schema.prisma && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -75,7 +75,7 @@
     "zod": "^3.22.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
+    "@playwright/test": "^1.55.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.0",
     "@types/bcryptjs": "^2.4.6",
@@ -95,7 +95,7 @@
     "playwright": "^1.40.0",
     "prettier": "^3.0.0",
     "supertest": "^7.1.4",
-    "ts-jest": "^29.4.1",
+    "ts-jest": "^29.4.2",
     "ts-node": "^10.9.2"
   }
 }

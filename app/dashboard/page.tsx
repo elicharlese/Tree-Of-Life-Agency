@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { apiClient } from '@/lib/api-client';
+import { apiClient } from '@/libs/shared-utils/api-client';
 import { Card, CardHeader, CardTitle, CardContent } from '@/libs/shared-ui/components/Card';
 import { Button } from '@/libs/shared-ui/components/Button';
 import { Alert } from '@/libs/shared-ui/components/Alert';
