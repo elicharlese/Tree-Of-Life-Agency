@@ -1,0 +1,124 @@
+{
+  "name": "tree-of-life-agency",
+  "version": 2,
+  "build": {
+    "env": {
+      "NODE_ENV": "production",
+      "NEXT_TELEMETRY_DISABLED": "1"
+    }
+  },
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "framework": "nextjs",
+  "functions": {
+    "app/api/**/*.ts": {
+      "runtime": "nodejs18.x",
+      "memory": 1024,
+      "maxDuration": 10
+    },
+    "server/**/*.ts": {
+      "runtime": "nodejs18.x", 
+      "memory": 2048,
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/app/api/$1"
+    },
+    {
+      "src": "/webhooks/(.*)",
+      "dest": "/server/integrations/webhookHandler.ts"
+    },
+    {
+      "src": "/graphql",
+      "dest": "/server/graphql/index.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/app/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/docs",
+      "destination": "/docs/getting-started",
+      "permanent": false
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin/dashboard",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/health",
+      "destination": "/api/health"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "DATABASE_URL": "@database_url",
+    "REDIS_URL": "@redis_url", 
+    "JWT_SECRET": "@jwt_secret",
+    "ENCRYPTION_KEY": "@encryption_key",
+    "SMTP_HOST": "@smtp_host",
+    "SMTP_PORT": "@smtp_port",
+    "SMTP_USER": "@smtp_user",
+    "SMTP_PASS": "@smtp_pass",
+    "AWS_ACCESS_KEY_ID": "@aws_access_key",
+    "AWS_SECRET_ACCESS_KEY": "@aws_secret_key",
+    "AWS_S3_BUCKET": "@aws_s3_bucket",
+    "STRIPE_SECRET_KEY": "@stripe_secret",
+    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret",
+    "HUBSPOT_API_KEY": "@hubspot_api_key",
+    "SALESFORCE_CLIENT_ID": "@salesforce_client_id",
+    "SALESFORCE_CLIENT_SECRET": "@salesforce_client_secret",
+    "ZOOM_JWT_TOKEN": "@zoom_jwt_token",
+    "SLACK_BOT_TOKEN": "@slack_bot_token"
+  },
+  "regions": ["iad1", "sfo1"],
+  "analytics": {
+    "enable": true
+  },
+  "speedInsights": {
+    "enable": true
+  }
+}
