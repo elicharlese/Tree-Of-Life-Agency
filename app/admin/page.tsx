@@ -9,7 +9,7 @@ import {
   FileText,
   Calendar
 } from 'lucide-react'
-import { getOrders, developers } from '@/libs/shared-utils/orders'
+import { getOrders, developers } from '../../../libs/shared-utils/orders'
 import { Order } from '@/libs/shared-utilss/shared-types/order'
 
 export default function AdminDashboard() {

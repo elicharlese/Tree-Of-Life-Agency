@@ -13,7 +13,7 @@ import {
   Star
 } from 'lucide-react'
 import Link from 'next/link'
-import { getOrderById } from '@/libs/shared-utils/orders'
+import { getOrderById } from '../../../libs/shared-utils/orders'
 import { Order } from '@/libs/shared-utilss/shared-types/order'
 
 interface OrderDetailPageProps {

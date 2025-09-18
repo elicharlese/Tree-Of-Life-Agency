@@ -12,10 +12,10 @@ import {
   Eye
 } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '@/libs/shared-ui/components'
-import { PageHeader } from '@/libs/shared-ui/components/layout/PageHeader'
-import { SearchFilter } from '@/libs/shared-ui/components/layout/SearchFilter'
-import { getOrders } from '@/libs/shared-utils/orders'
+import { Button } from '../../../libs/shared-ui/components'
+import { PageHeader } from '../../../libs/shared-ui/components/layout/PageHeader'
+import { SearchFilter } from '../../../libs/shared-ui/components/layout/SearchFilter'
+import { getOrders } from '../../../libs/shared-utils/orders'
 import { Order } from '@/libs/shared-utilss/shared-types/order'
 
 export default function CustomerDashboard() {

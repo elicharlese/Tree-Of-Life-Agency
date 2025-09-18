@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { Shield, Award } from 'lucide-react'
-import { PageHeader } from '@/libs/shared-ui/components/layout/PageHeader'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from '@/libs/shared-ui/components'
+import { PageHeader } from '../../../libs/shared-ui/components/layout/PageHeader'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from '../../../libs/shared-ui/components'
 
 export default function ElderTreePage() {
   return (
