@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { ArrowLeft, TreePine } from 'lucide-react'
-import { Button } from '@/libs/shared-ui/components/Button'
+import { Button } from '../Button'
 
 interface PageHeaderProps {
   title: string
@@ -11,7 +11,7 @@ interface PageHeaderProps {
     label: string
     href?: string
     onClick?: () => void
-    variant?: 'organic' | 'leaf' | 'wisdom' | 'secondary'
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
   }
 }
 
@@ -41,13 +41,13 @@ export function PageHeader({
             <div className="flex items-center space-x-4">
               {actionButton.href ? (
                 <Link href={actionButton.href}>
-                  <Button variant={actionButton.variant || 'organic'}>
+                  <Button variant={actionButton.variant || 'primary'}>
                     {actionButton.label}
                   </Button>
                 </Link>
               ) : (
                 <Button 
-                  variant={actionButton.variant || 'organic'}
+                  variant={actionButton.variant || 'primary'}
                   onClick={actionButton.onClick}
                 >
                   {actionButton.label}
