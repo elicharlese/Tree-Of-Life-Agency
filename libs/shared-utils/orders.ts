@@ -1,4 +1,32 @@
-import { Order, OrderItem, Developer } from '@/libs/shared-types/order'
+// Mock types for orders since shared-types may not be available
+export interface Order {
+  id: string;
+  customerId: string;
+  status: 'pending' | 'in-progress' | 'completed' | 'cancelled';
+  items: OrderItem[];
+  total: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface OrderItem {
+  id: string;
+  serviceId: string;
+  name: string;
+  price: number;
+  timeline: string;
+}
+
+export interface Developer {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  skills: string[];
+  rating: number;
+  hourlyRate: number;
+  availability: 'available' | 'busy';
+}
 
 // Mock data storage - in production, this would be a database
 const orders: Order[] = []
