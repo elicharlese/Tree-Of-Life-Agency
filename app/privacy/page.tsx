@@ -1,6 +1,6 @@
 'use client'
 
-import { PageHeader } from '../../../libs/shared-ui/components/layout/PageHeader'
+import { PageHeader } from '../../libs/shared-ui/components/layout/PageHeader'
 
 export default function PrivacyPage() {
   return (

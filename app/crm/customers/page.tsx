@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { PlusIcon, MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline';
-import { Button } from '../../../libs/shared-ui/components/Button';
-import { Input } from '../../../libs/shared-ui/components/input';
-import { Card, CardHeader, CardTitle, CardContent } from '../../../libs/shared-ui/components/card';
-import { Badge } from '../../../libs/shared-ui/components/Badge';
-import { Avatar } from '../../../libs/shared-ui/components/Avatar';
+import { Button } from '../../libs/shared-ui/components/Button';
+import { Input } from '../../libs/shared-ui/components/input';
+import { Card, CardHeader, CardTitle, CardContent } from '../../libs/shared-ui/components/card';
+import { Badge } from '../../libs/shared-ui/components/Badge';
+import { Avatar } from '../../libs/shared-ui/components/Avatar';
 import { useAuth } from '../../../libs/shared-ui/hooks/useAuth';
 import { toast } from 'react-hot-toast';
 
