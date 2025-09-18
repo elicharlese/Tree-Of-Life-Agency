@@ -2,8 +2,14 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
-import Joi from 'joi';
-import { AuthRequest } from '../middleware/auth';
+import { z } from 'zod';
+import { logger } from '../middleware/logging';
+import { 
+  createSession, 
+  destroySession, 
+  refreshAccessToken, 
+  destroyAllUserSessions 
+} from '../middleware/sessionManager';
 
 const prisma = new PrismaClient();
 
