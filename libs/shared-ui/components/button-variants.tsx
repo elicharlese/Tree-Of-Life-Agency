@@ -12,11 +12,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
     
     const variants = {
-      organic: 'bg-bark-600 hover:bg-bark-700 text-white shadow-organic hover:shadow-bark focus:ring-bark-500 transform hover:scale-105 rounded-organic',
-      leaf: 'bg-leaf-500 hover:bg-leaf-600 text-white shadow-organic hover:shadow-leaf focus:ring-leaf-500 transform hover:scale-105 rounded-organic',
-      wisdom: 'bg-wisdom-500 hover:bg-wisdom-600 text-white shadow-organic hover:shadow-lg focus:ring-wisdom-500 transform hover:scale-105 rounded-organic',
-      secondary: 'bg-white hover:bg-bark-50 text-bark-700 border border-bark-300 shadow-sm hover:shadow-organic focus:ring-bark-500 rounded-organic',
-      ghost: 'hover:bg-bark-100 text-bark-700 rounded-organic',
+      organic: 'bg-bark-600 hover:bg-bark-700 text-white shadow-organic hover:shadow-bark focus:ring-bark-500 transform hover:scale-105 ',
+      leaf: 'bg-leaf-500 hover:bg-leaf-600 text-white shadow-organic hover:shadow-leaf focus:ring-leaf-500 transform hover:scale-105 ',
+      wisdom: 'bg-wisdom-500 hover:bg-wisdom-600 text-white shadow-organic hover:shadow-lg focus:ring-wisdom-500 transform hover:scale-105 ',
+      secondary: 'bg-white hover:bg-bark-50 text-bark-700 border border-bark-300 shadow-sm hover:shadow-organic focus:ring-bark-500 ',
+      ghost: 'hover:bg-bark-100 text-bark-700 ',
       link: 'text-leaf-600 hover:text-leaf-700 underline-offset-4 hover:underline'
     }
 

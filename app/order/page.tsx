@@ -2,20 +2,20 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  ArrowLeft,
-  Plus,
-  Minus,
-  Check,
-  Clock,
-  User,
-  Mail,
-  Building,
-  FileText
-} from 'lucide-react'
+import {
+  ArrowLeftIcon,
+  PlusIcon,
+  MinusIcon,
+  CheckIcon,
+  ClockIcon,
+  PersonIcon,
+  EnvelopeClosedIcon,
+  HomeIcon,
+  FileTextIcon
+} from '@radix-ui/react-icons'
 import Link from 'next/link'
-import { services, createOrder, calculateOrderTotal, estimateTimeline } from '../../../libs/shared-utils/orders'
-import { OrderItem } from '@/libs/shared-utilss/shared-types/order'
+import { services, createOrder, calculateOrderTotal, estimateTimeline } from '../../libs/shared-utils/orders'
+import { OrderItem } from '@/libs/shared-types/order'
 
 export default function OrderPage() {
   const [selectedServices, setSelectedServices] = useState<OrderItem[]>([])
@@ -95,8 +95,8 @@ export default function OrderPage() {
           animate={{ opacity: 1, scale: 1 }}
           className="card-organic p-12 text-center max-w-2xl mx-4"
         >
-          <div className="w-20 h-20 bg-leaf-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Check className="w-10 h-10 text-leaf-600" />
+          <div className="w-20 h-20 bg-leaf-100  flex items-center justify-center mx-auto mb-6">
+            <CheckIcon className="w-10 h-10 text-leaf-600" />
           </div>
           <h1 className="text-3xl font-serif text-bark-800 mb-4">Order Submitted Successfully!</h1>
           <p className="text-bark-600 mb-6">
@@ -124,7 +124,7 @@ export default function OrderPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Link href="/services" className="flex items-center text-bark-600 hover:text-leaf-600 mr-6">
-                <ArrowLeft className="mr-2 h-5 w-5" />
+                <ArrowLeftIcon className="mr-2 h-5 w-5" />
                 Back to Services
               </Link>
               <div className="flex items-center">
@@ -135,7 +135,7 @@ export default function OrderPage() {
               {[1, 2, 3].map((step) => (
                 <div
                   key={step}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                  className={`w-8 h-8  flex items-center justify-center text-sm font-medium ${
                     currentStep >= step
                       ? 'bg-leaf-500 text-white'
                       : 'bg-bark-200 text-bark-600'
@@ -165,7 +165,7 @@ export default function OrderPage() {
                     {services.map((service) => (
                       <div
                         key={service.id}
-                        className="border border-bark-200 rounded-organic p-4 hover:border-leaf-300 transition-colors"
+                        className="border border-bark-200  p-4 hover:border-leaf-300 transition-colors"
                       >
                         <div className="flex items-start justify-between mb-3">
                           <h3 className="font-semibold text-bark-800">{service.name}</h3>
@@ -173,7 +173,7 @@ export default function OrderPage() {
                             onClick={() => addService(service.id)}
                             className="p-1 text-leaf-600 hover:bg-leaf-50 rounded"
                           >
-                            <Plus className="w-5 h-5" />
+                            <PlusIcon className="w-5 h-5" />
                           </button>
                         </div>
                         <p className="text-sm text-bark-600 mb-3">{service.description}</p>
@@ -191,7 +191,7 @@ export default function OrderPage() {
                     <h3 className="text-xl font-semibold text-bark-800 mb-4">Selected Services</h3>
                     <div className="space-y-4">
                       {selectedServices.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 bg-leaf-50 rounded-organic">
+                        <div key={index} className="flex items-center justify-between p-4 bg-leaf-50 ">
                           <div className="flex-1">
                             <h4 className="font-medium text-bark-800">{item.serviceName}</h4>
                             <div className="flex items-center space-x-4 text-sm text-bark-600 mt-1">
@@ -211,7 +211,7 @@ export default function OrderPage() {
                               onClick={() => removeService(index)}
                               className="p-1 text-red-600 hover:bg-red-50 rounded"
                             >
-                              <Minus className="w-4 h-4" />
+                              <MinusIcon className="w-4 h-4" />
                             </button>
                           </div>
                         </div>
@@ -233,7 +233,7 @@ export default function OrderPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-bark-700 mb-2">
-                        <User className="w-4 h-4 inline mr-2" />
+                        <PersonIcon className="w-4 h-4 inline mr-2" />
                         Full Name *
                       </label>
                       <input
@@ -247,7 +247,7 @@ export default function OrderPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-bark-700 mb-2">
-                        <Mail className="w-4 h-4 inline mr-2" />
+                        <EnvelopeClosedIcon className="w-4 h-4 inline mr-2" />
                         Email Address *
                       </label>
                       <input
@@ -263,7 +263,7 @@ export default function OrderPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-bark-700 mb-2">
-                        <Building className="w-4 h-4 inline mr-2" />
+                        <HomeIcon className="w-4 h-4 inline mr-2" />
                         Company Name
                       </label>
                       <input
@@ -276,7 +276,7 @@ export default function OrderPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-bark-700 mb-2">
-                        <FileText className="w-4 h-4 inline mr-2" />
+                        <FileTextIcon className="w-4 h-4 inline mr-2" />
                         Project Name
                       </label>
                       <input
@@ -313,7 +313,7 @@ export default function OrderPage() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold text-bark-800 mb-3">Customer Information</h3>
-                    <div className="bg-bark-50 rounded-organic p-4 space-y-2">
+                    <div className="bg-bark-50  p-4 space-y-2">
                       <p><strong>Name:</strong> {customerInfo.name}</p>
                       <p><strong>Email:</strong> {customerInfo.email}</p>
                       {customerInfo.companyName && <p><strong>Company:</strong> {customerInfo.companyName}</p>}
@@ -324,7 +324,7 @@ export default function OrderPage() {
                     <h3 className="text-lg font-semibold text-bark-800 mb-3">Selected Services</h3>
                     <div className="space-y-3">
                       {selectedServices.map((item, index) => (
-                        <div key={index} className="flex justify-between items-center p-3 bg-bark-50 rounded-organic">
+                        <div key={index} className="flex justify-between items-center p-3 bg-bark-50 ">
                           <span>{item.serviceName}</span>
                           <span className="font-medium">${item.price.toLocaleString()}</span>
                         </div>
@@ -390,7 +390,7 @@ export default function OrderPage() {
                         </span>
                       </div>
                       <div className="flex items-center text-sm text-bark-600">
-                        <Clock className="w-4 h-4 mr-1" />
+                        <ClockIcon className="w-4 h-4 mr-1" />
                         Estimated timeline: {estimateTimeline(selectedServices)}
                       </div>
                     </div>

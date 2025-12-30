@@ -1,5 +1,5 @@
 import React from 'react'
-import { Search, Filter } from 'lucide-react'
+import { Search, Filter } from 'feather-icons-react'
 import { Input, Select, Card } from '@/libs/shared-ui/components'
 
 interface SearchFilterProps {

@@ -1,10 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { 
-  Users, 
-  Star, 
-  MapPin, 
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  Users,
+  Star,
+  MapPin,
   Calendar,
   ArrowLeft,
   Github,
@@ -12,6 +13,7 @@ import {
   Mail,
   Award
 } from 'lucide-react'
+import { MagicWandIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
 const teamMembers = [
@@ -96,6 +98,14 @@ const teamMembers = [
 ]
 
 export default function Collective() {
+  const [isJoinOpen, setIsJoinOpen] = useState(false)
+
+  const popoutVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: 40, scale: 0.95 },
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-bark-50 via-leaf-50 to-root-50">
       {/* Header */}
@@ -111,7 +121,13 @@ export default function Collective() {
                 <h1 className="text-2xl font-serif text-bark-800">Our Collective</h1>
               </div>
             </div>
-            <button className="btn-organic">Join Us</button>
+            <button
+              className="btn-organic flex items-center space-x-2"
+              onClick={() => setIsJoinOpen(true)}
+            >
+              <MagicWandIcon className="h-4 w-4" />
+              <span>Join Us</span>
+            </button>
           </div>
         </div>
       </div>
@@ -236,7 +252,7 @@ export default function Collective() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16 text-center bg-gradient-to-r from-leaf-500 to-wisdom-500 rounded-branch shadow-organic p-12"
+          className="mt-16 text-center bg-gradient-to-r from-leaf-500 to-wisdom-500  shadow-organic p-12"
         >
           <Users className="h-16 w-16 text-white mx-auto mb-6" />
           <h3 className="text-3xl font-serif text-white mb-4">Want to Join Our Family?</h3>
@@ -254,6 +270,104 @@ export default function Collective() {
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {isJoinOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-bark-900/60 backdrop-blur"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              variants={popoutVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ duration: 0.25 }}
+              className="max-w-lg w-full bg-white rounded-none shadow-2xl border border-bark-200"
+            >
+              <div className="flex items-center justify-between border-b border-bark-200 px-6 py-4">
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-bark-400">Tree of Life Collective</p>
+                  <h3 className="text-2xl font-serif text-bark-900">Join Our Family</h3>
+                </div>
+                <button
+                  className="text-bark-400 hover:text-bark-900 transition-colors"
+                  onClick={() => setIsJoinOpen(false)}
+                  aria-label="Close"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="px-6 py-6 space-y-6">
+                <p className="text-bark-600 text-sm">
+                  Tell us a bit about yourself and we&apos;ll reach out with next steps, usually within 2 business days.
+                </p>
+                <form className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-bark-700 mb-1">Full Name</label>
+                      <input
+                        type="text"
+                        className="input-organic w-full"
+                        placeholder="Jordan Rivers"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-bark-700 mb-1">Email</label>
+                      <input
+                        type="email"
+                        className="input-organic w-full"
+                        placeholder="you@email.com"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-bark-700 mb-1">Specialty</label>
+                    <select className="input-organic w-full">
+                      <option>Design</option>
+                      <option>Frontend Engineering</option>
+                      <option>Backend Engineering</option>
+                      <option>Mobile</option>
+                      <option>Product / Strategy</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-bark-700 mb-1">Portfolio / Links</label>
+                    <input
+                      type="url"
+                      className="input-organic w-full"
+                      placeholder="https://portfolio.example"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-bark-700 mb-1">How do you want to collaborate?</label>
+                    <textarea
+                      rows={4}
+                      className="input-organic w-full"
+                      placeholder="Share a short note about how you like to work, current availability, or recent projects."
+                    />
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-bark-200">
+                    <p className="text-xs text-bark-500">
+                      By submitting you agree to our community guidelines.
+                    </p>
+                    <button
+                      type="button"
+                      className="btn-leaf px-6 py-3"
+                      onClick={() => setIsJoinOpen(false)}
+                    >
+                      Send Request
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

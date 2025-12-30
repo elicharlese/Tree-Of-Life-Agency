@@ -3,14 +3,19 @@ import Stripe from 'stripe';
 import { PrismaClient } from '@prisma/client';
 import { verifyToken } from '@/server/middleware/auth';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-08-27.basil'
-});
-
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Stripe secret key is available
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return NextResponse.json({ error: 'Payment service unavailable' }, { status: 503 });
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-08-27.basil'
+    });
+
     // Verify authentication
     const authHeader = request.headers.get('authorization');
     if (!authHeader?.startsWith('Bearer ')) {

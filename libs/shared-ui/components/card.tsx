@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({
   border = true,
   hover = false,
 }) => {
-  const baseClasses = 'bg-white rounded-lg';
+  const baseClasses = 'bg-white';
   
   const paddingClasses = {
     none: '',
@@ -64,17 +64,32 @@ interface CardTitleProps {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
-const CardTitle: React.FC<CardTitleProps> = ({ 
-  children, 
-  className = '', 
-  as: Component = 'h3' 
+const CardTitle: React.FC<CardTitleProps> = ({
+  children,
+  className = '',
+  as: Component = 'h3'
 }) => {
   const baseClasses = 'text-lg font-semibold text-gray-900';
-  
+
   return (
     <Component className={`${baseClasses} ${className}`}>
       {children}
     </Component>
+  );
+};
+
+interface CardDescriptionProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const CardDescription: React.FC<CardDescriptionProps> = ({ children, className = '' }) => {
+  const baseClasses = 'text-sm text-gray-600';
+
+  return (
+    <p className={`${baseClasses} ${className}`}>
+      {children}
+    </p>
   );
 };
 
@@ -104,5 +119,5 @@ const CardFooter: React.FC<CardFooterProps> = ({ children, className = '' }) => 
   );
 };
 
-export { Card, CardHeader, CardTitle, CardContent, CardFooter };
-export type { CardProps, CardHeaderProps, CardTitleProps, CardContentProps, CardFooterProps };
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
+export type { CardProps, CardHeaderProps, CardTitleProps, CardDescriptionProps, CardContentProps, CardFooterProps };

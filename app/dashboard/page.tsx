@@ -21,7 +21,7 @@ import {
   BarChart3,
   PieChart,
   Activity
-} from 'lucide-react';
+} from 'feather-icons-react';
 
 interface DashboardStats {
   users: {
@@ -206,7 +206,7 @@ export default function DashboardPage() {
   if (authLoading || isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin  h-12 w-12 border-b-2 border-indigo-600"></div>
       </div>
     );
   }
@@ -447,9 +447,9 @@ export default function DashboardPage() {
             <CardContent>
               <div className="space-y-4">
                 {recentActivity.map((activity) => (
-                  <div key={activity.id} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50">
+                  <div key={activity.id} className="flex items-start space-x-3 p-3  hover:bg-gray-50">
                     <div className="flex-shrink-0">
-                      <div className="h-2 w-2 bg-indigo-600 rounded-full mt-2"></div>
+                      <div className="h-2 w-2 bg-indigo-600  mt-2"></div>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-gray-900">{activity.description}</p>

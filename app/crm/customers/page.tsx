@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PlusIcon, MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline';
-import { Button } from '../../libs/shared-ui/components/Button';
-import { Input } from '../../libs/shared-ui/components/input';
-import { Card, CardHeader, CardTitle, CardContent } from '../../libs/shared-ui/components/card';
-import { Badge } from '../../libs/shared-ui/components/Badge';
-import { Avatar } from '../../libs/shared-ui/components/Avatar';
-import { useAuth } from '../../../libs/shared-ui/hooks/useAuth';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/libs/shared-ui/components/Button';
+import { Input } from '@/libs/shared-ui/components/input';
+import { Card, CardContent } from '@/libs/shared-ui/components/card';
+import { Badge } from '@/libs/shared-ui/components/Badge';
+import { Avatar } from '@/libs/shared-ui/components/Avatar';
+import { useAuth } from '@/libs/shared-ui/hooks/useAuth';
 import { toast } from 'react-hot-toast';
 
 interface Customer {
@@ -34,13 +35,14 @@ interface Customer {
 
 const statusColors = {
   ACTIVE: 'success',
-  INACTIVE: 'secondary',
+  INACTIVE: 'default',
   PROSPECT: 'warning',
-  CHURNED: 'destructive',
+  CHURNED: 'error',
 } as const;
 
 export default function CustomersPage() {
-  const { user } = useAuth();
+  const router = useRouter();
+  useAuth();
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,7 +54,7 @@ export default function CustomersPage() {
     totalPages: 0,
   });
 
-  const fetchCustomers = async () => {
+  const fetchCustomers = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -85,11 +87,11 @@ export default function CustomersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.page, pagination.limit, searchQuery, statusFilter]);
 
   useEffect(() => {
     fetchCustomers();
-  }, [pagination.page, searchQuery, statusFilter]);
+  }, [fetchCustomers]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,7 +143,10 @@ export default function CustomersPage() {
             Manage your customer relationships and track interactions
           </p>
         </div>
-        <Button href="/crm/customers/new" className="flex items-center gap-2">
+        <Button
+          className="flex items-center gap-2"
+          onClick={() => router.push('/crm/customers/new')}
+        >
           <PlusIcon className="h-4 w-4" />
           Add Customer
         </Button>
@@ -166,28 +171,28 @@ export default function CustomersPage() {
             
             <div className="flex gap-2">
               <Button
-                variant={statusFilter === 'ACTIVE' ? 'default' : 'outline'}
+                variant={statusFilter === 'ACTIVE' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => handleStatusFilter('ACTIVE')}
               >
                 Active
               </Button>
               <Button
-                variant={statusFilter === 'PROSPECT' ? 'default' : 'outline'}
+                variant={statusFilter === 'PROSPECT' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => handleStatusFilter('PROSPECT')}
               >
                 Prospects
               </Button>
               <Button
-                variant={statusFilter === 'INACTIVE' ? 'default' : 'outline'}
+                variant={statusFilter === 'INACTIVE' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => handleStatusFilter('INACTIVE')}
               >
                 Inactive
               </Button>
               <Button
-                variant={statusFilter === 'CHURNED' ? 'default' : 'outline'}
+                variant={statusFilter === 'CHURNED' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => handleStatusFilter('CHURNED')}
               >
@@ -202,7 +207,7 @@ export default function CustomersPage() {
       {customers.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
-            <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+            <div className="mx-auto w-24 h-24 bg-gray-100  flex items-center justify-center mb-4">
               <FunnelIcon className="h-12 w-12 text-gray-400" />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">No customers found</h3>
@@ -213,7 +218,7 @@ export default function CustomersPage() {
               }
             </p>
             {!searchQuery && !statusFilter && (
-              <Button href="/crm/customers/new">Add Customer</Button>
+              <Button onClick={() => router.push('/crm/customers/new')}>Add Customer</Button>
             )}
           </CardContent>
         </Card>
@@ -316,7 +321,7 @@ export default function CustomersPage() {
               return (
                 <Button
                   key={pageNum}
-                  variant={pageNum === pagination.page ? 'default' : 'outline'}
+                  variant={pageNum === pagination.page ? 'primary' : 'outline'}
                   size="sm"
                   onClick={() => setPagination(prev => ({ ...prev, page: pageNum }))}
                 >

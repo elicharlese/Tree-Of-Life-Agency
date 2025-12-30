@@ -164,7 +164,7 @@ export default function Hero3DScene() {
       
       {/* Overlay content */}
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <div className="text-center z-10 bg-white/10 backdrop-blur-sm rounded-organic p-6 max-w-md">
+        <div className="text-center z-10 bg-white/10 backdrop-blur-sm  p-6 max-w-md">
           <h3 className="text-lg font-semibold text-bark-800 mb-2">
             Interactive Family Network
           </h3>

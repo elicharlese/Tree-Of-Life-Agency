@@ -10,7 +10,7 @@ import {
   FileText,
   Download,
   Star
-} from 'lucide-react'
+} from 'feather-icons-react'
 import Link from 'next/link'
 import { getOrderById, Order } from '../../../../libs/shared-utils/orders'
 
@@ -34,7 +34,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-bark-50 via-leaf-50 to-root-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-leaf-500"></div>
+        <div className="animate-spin  h-12 w-12 border-b-2 border-leaf-500"></div>
       </div>
     )
   }
@@ -97,7 +97,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
+              <span className={`px-3 py-1  text-sm font-medium ${getStatusColor(order.status)}`}>
                 {order.status.replace('_', ' ').toUpperCase()}
               </span>
             </div>
@@ -139,9 +139,9 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                   <span className="text-sm font-medium text-bark-700">Progress</span>
                   <span className="text-sm text-bark-500">{getProgressPercentage(order.status)}%</span>
                 </div>
-                <div className="w-full bg-bark-200 rounded-full h-2">
+                <div className="w-full bg-bark-200  h-2">
                   <div 
-                    className="bg-leaf-500 h-2 rounded-full transition-all duration-300"
+                    className="bg-leaf-500 h-2  transition-all duration-300"
                     style={{ width: `${getProgressPercentage(order.status)}%` }}
                   ></div>
                 </div>
@@ -152,7 +152,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                 <h3 className="font-semibold text-bark-800 mb-4">Services Ordered</h3>
                 <div className="space-y-4">
                   {order.items.map((item, index) => (
-                    <div key={index} className="border border-bark-200 rounded-organic p-4">
+                    <div key={index} className="border border-bark-200  p-4">
                       <div className="flex items-start justify-between mb-3">
                         <h4 className="font-medium text-bark-800">{item.serviceName}</h4>
                         <span className="font-semibold text-leaf-600">${item.price.toLocaleString()}</span>
@@ -194,7 +194,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                 <div className="space-y-4">
                   {order.milestones.map((milestone, index) => (
                     <div key={milestone.id} className="flex items-start space-x-4">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      <div className={`w-8 h-8  flex items-center justify-center ${
                         milestone.status === 'completed' 
                           ? 'bg-green-100 text-green-600' 
                           : milestone.status === 'in_progress'
@@ -215,9 +215,9 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                           <span>{milestone.progress}% complete</span>
                         </div>
                         {milestone.progress > 0 && (
-                          <div className="w-full bg-bark-200 rounded-full h-1 mt-2">
+                          <div className="w-full bg-bark-200  h-1 mt-2">
                             <div 
-                              className="bg-leaf-500 h-1 rounded-full"
+                              className="bg-leaf-500 h-1 "
                               style={{ width: `${milestone.progress}%` }}
                             ></div>
                           </div>
@@ -276,7 +276,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                 <div className="space-y-3">
                   {order.assignedDevelopers.map((developerId, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-leaf-100 rounded-full flex items-center justify-center">
+                      <div className="w-8 h-8 bg-leaf-100  flex items-center justify-center">
                         <Users className="w-4 h-4 text-leaf-600" />
                       </div>
                       <span className="text-bark-800">{developerId}</span>

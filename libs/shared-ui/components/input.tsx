@@ -26,7 +26,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 
-    const baseInputClasses = 'block w-full rounded-lg border-gray-300 shadow-sm transition-colors focus:border-indigo-500 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500';
+    const baseInputClasses = 'block w-full border-gray-300 shadow-sm transition-colors focus:border-indigo-500 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500';
     
     const errorClasses = error 
       ? 'border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500'

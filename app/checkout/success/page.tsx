@@ -1,10 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  CheckCircle, 
-  TreePine
-} from 'lucide-react'
+import { CheckCircle, TreePine } from 'lucide-react'
 import Link from 'next/link'
 
 export default function CheckoutSuccess() {

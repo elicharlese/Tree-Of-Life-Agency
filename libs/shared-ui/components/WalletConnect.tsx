@@ -46,8 +46,8 @@ export default function WalletConnect() {
   if (address) {
     return (
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 px-4 py-2 bg-green-100 rounded-lg">
-          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+        <div className="flex items-center gap-2 px-4 py-2 bg-green-100 ">
+          <div className="w-2 h-2 bg-green-500 "></div>
           <span className="text-sm font-medium text-green-800">
             {formatAddress(address)}
           </span>

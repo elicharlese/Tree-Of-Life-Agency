@@ -25,7 +25,7 @@ const Avatar: React.FC<AvatarProps> = ({
     xl: 'h-16 w-16 text-xl',
   };
   
-  const baseClasses = 'inline-flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-medium overflow-hidden';
+  const baseClasses = 'inline-flex items-center justify-center  bg-gray-100 text-gray-600 font-medium overflow-hidden';
   const classes = `${baseClasses} ${sizeClasses[size]} ${className}`;
   
   if (src) {

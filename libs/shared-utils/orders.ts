@@ -1,8 +1,11 @@
 // Mock types for orders since shared-types may not be available
+export type OrderSize = 'seedling' | 'sapling' | 'stalk' | 'sequoia';
+
 export interface Order {
   id: string;
   customerId: string;
   status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
+  size?: OrderSize;
   items: OrderItem[];
   total: number;
   totalAmount?: number;
@@ -28,7 +31,7 @@ export interface OrderItem {
   price: number;
   timeline: string;
   features?: string[];
-  customizations?: any[];
+  customizations?: Record<string, unknown>;
 }
 
 export interface Developer {
@@ -94,6 +97,54 @@ export const services = [
     timeline: '1-2 weeks',
     features: ['Technical Audits', 'Architecture Planning', 'Team Training', 'Growth Strategy'],
     description: 'Technical consulting and product strategy to grow your business.'
+  },
+  {
+    id: 'ai-ml',
+    name: 'AI & Machine Learning',
+    basePrice: 6000,
+    timeline: '6-12 weeks',
+    features: ['Machine Learning Models', 'Natural Language Processing', 'Computer Vision', 'Predictive Analytics'],
+    description: 'Intelligent solutions powered by machine learning and artificial intelligence.'
+  },
+  {
+    id: 'blockchain',
+    name: 'Blockchain & Web3',
+    basePrice: 8000,
+    timeline: '8-16 weeks',
+    features: ['Smart Contracts', 'DeFi Applications', 'NFT Platforms', 'Blockchain Integration'],
+    description: 'Decentralized applications and blockchain solutions for the future.'
+  },
+  {
+    id: 'ecommerce',
+    name: 'E-commerce Solutions',
+    basePrice: 4500,
+    timeline: '4-8 weeks',
+    features: ['Custom Storefronts', 'Payment Integration', 'Inventory Management', 'Analytics Dashboard'],
+    description: 'Custom online stores and marketplace platforms with seamless checkout.'
+  },
+  {
+    id: 'cms',
+    name: 'Content Management Systems',
+    basePrice: 3500,
+    timeline: '3-6 weeks',
+    features: ['Custom CMS Development', 'Headless Architecture', 'Multi-language Support', 'SEO Optimization'],
+    description: 'Flexible CMS solutions for content creators and marketing teams.'
+  },
+  {
+    id: 'testing',
+    name: 'Testing & Quality Assurance',
+    basePrice: 2000,
+    timeline: '2-4 weeks',
+    features: ['Automated Testing', 'Manual QA', 'Performance Testing', 'Security Testing'],
+    description: 'Comprehensive testing services to ensure software reliability and performance.'
+  },
+  {
+    id: 'security',
+    name: 'Security Audits & Implementation',
+    basePrice: 3000,
+    timeline: '2-6 weeks',
+    features: ['Security Audits', 'Vulnerability Assessment', 'Compliance Implementation', 'Penetration Testing'],
+    description: 'Protect your applications with enterprise-grade security solutions.'
   }
 ]
 
@@ -141,8 +192,17 @@ export const developers: Developer[] = [
 ]
 
 export function createOrder(orderData: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>): Order {
+  const totalAmount = orderData.totalAmount || orderData.total || 0
+  
+  // Auto-determine order size based on total amount
+  let size: OrderSize = 'seedling'
+  if (totalAmount >= 50000) size = 'sequoia'
+  else if (totalAmount >= 15000) size = 'stalk'
+  else if (totalAmount >= 5000) size = 'sapling'
+  
   const order: Order = {
     ...orderData,
+    size: orderData.size || size,
     id: `ORD-${orderCounter.toString().padStart(4, '0')}`,
     createdAt: new Date(),
     updatedAt: new Date()

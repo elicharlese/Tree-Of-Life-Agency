@@ -2,25 +2,48 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Eye, 
-  EyeOff, 
-  LogIn, 
-  TreePine,
-  ArrowLeft
-} from 'lucide-react'
+import { ArrowLeft, Eye, EyeOff, LogIn, TreePine } from 'lucide-react'
 import Link from 'next/link'
-import { Input } from '../../libs/shared-ui/components'
+import { Input } from '@/libs/shared-ui/components'
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle sign in logic here
-    console.log('Sign in with:', { email, password })
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch('/api/v1/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        // Store token and user data
+        localStorage.setItem('authToken', data.data.token)
+        localStorage.setItem('user', JSON.stringify(data.data.user))
+
+        // Redirect to dashboard
+        window.location.href = '/dashboard'
+      } else {
+        setError(data.error || 'Login failed')
+      }
+    } catch (error) {
+      setError('Network error. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -38,6 +61,14 @@ export default function SignIn() {
             <p className="text-bark-600">Sign in to your knowledge library</p>
           </div>
           
+          {/* Error Alert */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 p-4 flex items-center space-x-3">
+              <div className="text-red-500">⚠️</div>
+              <p className="text-red-700 text-sm">{error}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-bark-700 mb-2">
@@ -48,7 +79,6 @@ export default function SignIn() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                variant="organic"
                 className="w-full"
                 placeholder="your.email@example.com"
                 required
@@ -65,7 +95,6 @@ export default function SignIn() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  variant="organic"
                   className="w-full pr-12"
                   placeholder="••••••••"
                   required
@@ -105,10 +134,15 @@ export default function SignIn() {
             
             <button
               type="submit"
-              className="btn-organic w-full flex items-center justify-center"
+              disabled={isLoading}
+              className="btn-organic w-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <LogIn className="mr-2 h-5 w-5" />
-              Sign In
+              {isLoading ? (
+                <div className="animate-spin h-5 w-5 border-b-2 border-white mr-2"></div>
+              ) : (
+                <LogIn className="mr-2 h-5 w-5" />
+              )}
+              {isLoading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
           

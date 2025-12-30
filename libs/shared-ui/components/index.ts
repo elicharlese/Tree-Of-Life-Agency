@@ -1,11 +1,13 @@
 // Centralized UI Component Library Export  
 export { Button } from './Button'
 export { Input } from './input'
-export { Card, CardHeader, CardTitle, CardContent, CardFooter } from './card'
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card'
 export { Badge } from './Badge'
 export { Avatar } from './Avatar'
 export { Select } from './select'
 export { Label } from './label'
+export { Logo } from './Logo'
+export { OrderSizeBadge } from './OrderSizeBadge'
 
 // Variants for advanced usage
 export { Button as ButtonVariant } from './button-variants'

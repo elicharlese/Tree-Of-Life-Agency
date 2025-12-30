@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Shield, Award } from 'lucide-react'
+import { ArrowLeft, Crown, Shield, Award, Star, Users } from 'feather-icons-react'
 import { PageHeader } from '../../../libs/shared-ui/components/layout/PageHeader'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from '../../../libs/shared-ui/components'
 

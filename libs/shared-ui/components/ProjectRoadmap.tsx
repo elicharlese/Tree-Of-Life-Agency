@@ -12,7 +12,7 @@ import {
   Zap,
   Target,
   Flag
-} from 'lucide-react'
+} from 'feather-icons-react'
 
 interface Milestone {
   id: string
@@ -119,7 +119,7 @@ export default function ProjectRoadmap() {
   }
 
   return (
-    <div className="w-full bg-dark-900 rounded-xl border border-dark-700 overflow-hidden">
+    <div className="w-full bg-dark-900  border border-dark-700 overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-green-600 to-teal-600 p-6 text-white">
         <div className="flex items-center justify-between">
@@ -147,7 +147,7 @@ export default function ProjectRoadmap() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setViewMode('timeline')}
-              className={`px-4 py-2 rounded-lg transition-colors ${
+              className={`px-4 py-2  transition-colors ${
                 viewMode === 'timeline' ? 'bg-primary-600 text-white' : 'bg-dark-800 text-dark-300'
               }`}
             >
@@ -155,7 +155,7 @@ export default function ProjectRoadmap() {
             </button>
             <button
               onClick={() => setViewMode('kanban')}
-              className={`px-4 py-2 rounded-lg transition-colors ${
+              className={`px-4 py-2  transition-colors ${
                 viewMode === 'kanban' ? 'bg-primary-600 text-white' : 'bg-dark-800 text-dark-300'
               }`}
             >
@@ -190,7 +190,7 @@ export default function ProjectRoadmap() {
                     className="relative"
                   >
                     {/* Timeline Node */}
-                    <div className={`absolute left-6 w-4 h-4 rounded-full border-2 bg-dark-900 ${getStatusColor(milestone.status)}`}>
+                    <div className={`absolute left-6 w-4 h-4  border-2 bg-dark-900 ${getStatusColor(milestone.status)}`}>
                       <Icon className="w-2 h-2 absolute top-1 left-1" />
                     </div>
                     
@@ -224,9 +224,9 @@ export default function ProjectRoadmap() {
                               {milestone.tasks.length} tasks
                             </span>
                           </div>
-                          <div className="w-full bg-dark-700 rounded-full h-1.5">
+                          <div className="w-full bg-dark-700  h-1.5">
                             <div 
-                              className="bg-primary-500 h-1.5 rounded-full transition-all duration-500"
+                              className="bg-primary-500 h-1.5  transition-all duration-500"
                               style={{ 
                                 width: `${(milestone.tasks.filter(t => t.status === 'completed').length / milestone.tasks.length) * 100}%` 
                               }}
@@ -243,7 +243,7 @@ export default function ProjectRoadmap() {
                             <h4 className="font-medium mb-3">Tasks</h4>
                             <div className="space-y-2">
                               {milestone.tasks.map((task) => (
-                                <div key={task.id} className="flex items-center justify-between p-2 bg-dark-800 rounded-lg">
+                                <div key={task.id} className="flex items-center justify-between p-2 bg-dark-800 ">
                                   <div className="flex items-center gap-3">
                                     {task.status === 'completed' ? (
                                       <CheckCircle className="w-4 h-4 text-green-500" />
@@ -287,13 +287,13 @@ export default function ProjectRoadmap() {
                   {mockRoadmapData
                     .filter(m => m.status === status || (status === 'pending' && m.status === 'upcoming'))
                     .map((milestone) => (
-                      <div key={milestone.id} className="p-3 bg-dark-800 rounded-lg">
+                      <div key={milestone.id} className="p-3 bg-dark-800 ">
                         <h4 className="font-medium mb-1">{milestone.title}</h4>
                         <p className="text-xs text-dark-400 mb-2">{formatDate(milestone.date)}</p>
                         <div className="flex items-center gap-2">
-                          <div className="w-full bg-dark-700 rounded-full h-1">
+                          <div className="w-full bg-dark-700  h-1">
                             <div 
-                              className="bg-primary-500 h-1 rounded-full"
+                              className="bg-primary-500 h-1 "
                               style={{ 
                                 width: `${(milestone.tasks.filter(t => t.status === 'completed').length / milestone.tasks.length) * 100}%` 
                               }}

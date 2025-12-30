@@ -1,21 +1,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Plus, 
-  Mail, 
-  Calendar, 
-  UserCheck, 
-  UserX, 
-  Clock, 
-  Trash2, 
+import {
+  Plus,
+  Mail,
+  Calendar,
+  UserCheck,
+  UserX,
+  Clock,
+  Trash,
   Copy,
   CheckCircle,
-  XCircle,
+  X,
   AlertCircle,
   Search,
   Filter
-} from 'lucide-react';
+} from 'feather-icons-react';
 
 interface Invitation {
   id: string;
@@ -152,7 +152,7 @@ export default function InvitationsPage() {
       case 'ACCEPTED':
         return <CheckCircle className="h-4 w-4 text-green-500" />;
       case 'EXPIRED':
-        return <XCircle className="h-4 w-4 text-red-500" />;
+        return <X className="h-4 w-4 text-red-500" />;
       case 'REVOKED':
         return <UserX className="h-4 w-4 text-gray-500" />;
       default:
@@ -217,7 +217,7 @@ export default function InvitationsPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin  h-12 w-12 border-b-2 border-indigo-600"></div>
       </div>
     );
   }
@@ -233,7 +233,7 @@ export default function InvitationsPage() {
 
         {/* Success/Error Messages */}
         {success && (
-          <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-3">
+          <div className="mb-6 bg-green-50 border border-green-200  p-4 flex items-center space-x-3">
             <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
             <p className="text-green-700 text-sm">{success}</p>
             <button
@@ -246,7 +246,7 @@ export default function InvitationsPage() {
         )}
 
         {error && (
-          <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-3">
+          <div className="mb-6 bg-red-50 border border-red-200  p-4 flex items-center space-x-3">
             <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
             <p className="text-red-700 text-sm">{error}</p>
             <button
@@ -259,7 +259,7 @@ export default function InvitationsPage() {
         )}
 
         {/* Actions Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white  shadow-sm border border-gray-200 p-6 mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 flex-1">
               {/* Search */}
@@ -270,7 +270,7 @@ export default function InvitationsPage() {
                   placeholder="Search by email or inviter..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300  focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
               </div>
 
@@ -279,7 +279,7 @@ export default function InvitationsPage() {
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="px-3 py-2 border border-gray-300  focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 >
                   <option value="ALL">All Status</option>
                   <option value="PENDING">Pending</option>
@@ -291,7 +291,7 @@ export default function InvitationsPage() {
                 <select
                   value={roleFilter}
                   onChange={(e) => setRoleFilter(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="px-3 py-2 border border-gray-300  focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 >
                   <option value="ALL">All Roles</option>
                   <option value="CLIENT">Client</option>
@@ -305,7 +305,7 @@ export default function InvitationsPage() {
 
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+              className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white  hover:bg-indigo-700 transition-colors"
             >
               <Plus className="h-4 w-4" />
               <span>Send Invitation</span>
@@ -314,7 +314,7 @@ export default function InvitationsPage() {
         </div>
 
         {/* Invitations Table */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-white  shadow-sm border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -352,14 +352,14 @@ export default function InvitationsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getRoleColor(invitation.role)}`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5  text-xs font-medium ${getRoleColor(invitation.role)}`}>
                         {invitation.role}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-2">
                         {getStatusIcon(invitation.status)}
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(invitation.status)}`}>
+                        <span className={`inline-flex items-center px-2.5 py-0.5  text-xs font-medium ${getStatusColor(invitation.status)}`}>
                           {invitation.status}
                         </span>
                         {invitation.status === 'PENDING' && isExpired(invitation.expiresAt) && (
@@ -421,7 +421,7 @@ export default function InvitationsPage() {
         {/* Create Invitation Modal */}
         {showCreateModal && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg  bg-white">
               <div className="mt-3">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Send New Invitation</h3>
                 
@@ -436,7 +436,7 @@ export default function InvitationsPage() {
                       required
                       value={createForm.email}
                       onChange={(e) => setCreateForm(prev => ({ ...prev, email: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full px-3 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       placeholder="user@example.com"
                     />
                   </div>
@@ -449,7 +449,7 @@ export default function InvitationsPage() {
                       id="role"
                       value={createForm.role}
                       onChange={(e) => setCreateForm(prev => ({ ...prev, role: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full px-3 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
                       <option value="CLIENT">Client</option>
                       <option value="AGENT">Agent</option>
@@ -463,14 +463,14 @@ export default function InvitationsPage() {
                     <button
                       type="button"
                       onClick={() => setShowCreateModal(false)}
-                      className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                      className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300  hover:bg-gray-50"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={isCreating}
-                      className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 disabled:opacity-50"
+                      className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent  hover:bg-indigo-700 disabled:opacity-50"
                     >
                       {isCreating ? 'Sending...' : 'Send Invitation'}
                     </button>

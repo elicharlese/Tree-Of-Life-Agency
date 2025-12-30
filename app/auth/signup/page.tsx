@@ -2,15 +2,9 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Eye, 
-  EyeOff, 
-  UserPlus, 
-  TreePine,
-  ArrowLeft
-} from 'lucide-react'
+import { ArrowLeft, Eye, EyeOff, TreePine, UserPlus } from 'lucide-react'
 import Link from 'next/link'
-import { Input } from '../../libs/shared-ui/components'
+import { Input } from '@/libs/shared-ui/components'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
@@ -50,7 +44,6 @@ export default function SignUp() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                variant="organic"
                 className="w-full"
                 placeholder="Your full name"
                 required
@@ -66,7 +59,6 @@ export default function SignUp() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                variant="organic"
                 className="w-full"
                 placeholder="your.email@example.com"
                 required
@@ -83,7 +75,6 @@ export default function SignUp() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  variant="organic"
                   className="w-full pr-12"
                   placeholder="••••••••"
                   required
@@ -114,7 +105,6 @@ export default function SignUp() {
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                variant="organic"
                 className="w-full"
                 placeholder="••••••••"
                 required

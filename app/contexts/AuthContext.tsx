@@ -30,6 +30,7 @@ interface AuthContextType {
   refreshUser: () => Promise<void>;
   hasRole: (roles: string | string[]) => boolean;
   hasPermission: (permission: string) => boolean;
+  updateProfile: (updates: Partial<User>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -241,6 +242,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return allowedRoles.includes(user.role);
   };
 
+  const updateProfile = async (updates: Partial<User>) => {
+    setUser(prev => {
+      if (!prev) return prev
+      const updatedUser = { ...prev, ...updates }
+      localStorage.setItem('user', JSON.stringify(updatedUser))
+      return updatedUser
+    })
+  }
+
   const value: AuthContextType = {
     user,
     isLoading,
@@ -251,6 +261,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     refreshUser,
     hasRole,
     hasPermission,
+    updateProfile,
   };
 
   return (
@@ -279,7 +290,7 @@ export function withAuth<P extends object>(
     if (isLoading) {
       return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+          <div className="animate-spin  h-12 w-12 border-b-2 border-indigo-600"></div>
         </div>
       );
     }

@@ -11,7 +11,7 @@ import {
   FileText,
   Calculator,
   TrendingUp
-} from 'lucide-react'
+} from 'feather-icons-react'
 
 interface SOWItem {
   id: string
@@ -102,7 +102,7 @@ export default function SOWSection() {
   }
 
   return (
-    <div className="w-full bg-dark-900 rounded-xl border border-dark-700 overflow-hidden">
+    <div className="w-full bg-dark-900  border border-dark-700 overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
         <div className="flex items-center justify-between">
@@ -124,9 +124,9 @@ export default function SOWSection() {
             <span>Project Progress</span>
             <span>{Math.round(progressPercentage)}% Complete</span>
           </div>
-          <div className="w-full bg-blue-800 rounded-full h-2">
+          <div className="w-full bg-blue-800  h-2">
             <motion.div
-              className="bg-white rounded-full h-2"
+              className="bg-white  h-2"
               initial={{ width: 0 }}
               animate={{ width: `${progressPercentage}%` }}
               transition={{ duration: 1, delay: 0.5 }}

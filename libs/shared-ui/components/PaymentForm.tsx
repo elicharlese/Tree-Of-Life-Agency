@@ -191,13 +191,13 @@ export default function PaymentForm({
           {paymentMethod === 'wallet' && (
             <div className="space-y-4">
               {address ? (
-                <div className="p-4 bg-green-50 rounded-lg">
+                <div className="p-4 bg-green-50 ">
                   <p className="text-sm text-green-800">
                     Connected: {address.slice(0, 6)}...{address.slice(-4)}
                   </p>
                 </div>
               ) : (
-                <div className="p-4 bg-yellow-50 rounded-lg">
+                <div className="p-4 bg-yellow-50 ">
                   <p className="text-sm text-yellow-800">
                     Please connect your wallet to continue
                   </p>

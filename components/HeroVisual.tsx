@@ -123,7 +123,7 @@ const HeroVisual: React.FC = () => {
       {Array.from({ length: 12 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-green-300 rounded-full opacity-30"
+          className="absolute w-2 h-2 bg-green-300  opacity-30"
           animate={{
             x: [0, Math.random() * 100 - 50],
             y: [0, Math.random() * 100 - 50],

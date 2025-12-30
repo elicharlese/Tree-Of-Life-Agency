@@ -1,16 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { Palette, CheckCircle } from 'lucide-react'
-import { PageHeader } from '../../../libs/shared-ui/components/layout/PageHeader'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from '../../../libs/shared-ui/components'
+import { CheckCircle, Palette } from 'lucide-react'
+import { PageHeader } from '@/libs/shared-ui/components/layout/PageHeader'
+import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/libs/shared-ui/components'
 
 export default function DesignPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-bark-50 via-leaf-50 to-root-50">
-      <PageHeader title="UI/UX Design" backHref="/services" actionButton={{ label: 'Get Quote', href: '/order', variant: 'leaf' }} />
+      <PageHeader title="UI/UX Design" backHref="/services" actionButton={{ label: 'Get Quote', href: '/order', variant: 'primary' }} />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <Card variant="organic">
+        <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
               <Palette className="h-8 w-8 text-wisdom-600" />
@@ -28,7 +28,7 @@ export default function DesignPage() {
             </ul>
           </CardContent>
           <CardFooter className="flex gap-3">
-            <Link href="/order"><Button variant="leaf">Order Service</Button></Link>
+            <Link href="/order"><Button variant="primary">Order Service</Button></Link>
             <Link href="/services"><Button variant="secondary">All Services</Button></Link>
           </CardFooter>
         </Card>

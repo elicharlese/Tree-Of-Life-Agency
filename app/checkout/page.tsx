@@ -2,12 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  CreditCard, 
-  Shield, 
-  ArrowLeft,
-  TreePine
-} from 'lucide-react'
+import { ArrowLeft, CreditCard, Shield, TreePine } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Checkout() {
@@ -180,7 +175,7 @@ export default function Checkout() {
                 </div>
               </div>
               
-              <div className="flex items-center p-4 bg-leaf-50 rounded-organic">
+              <div className="flex items-center p-4 bg-leaf-50 ">
                 <Shield className="h-5 w-5 text-leaf-500 mr-2" />
                 <p className="text-sm text-bark-600">
                   Your payment information is securely encrypted and processed.
@@ -240,7 +235,7 @@ export default function Checkout() {
               </div>
             </div>
             
-            <div className="mt-8 p-4 bg-wisdom-50 rounded-organic">
+            <div className="mt-8 p-4 bg-wisdom-50 ">
               <h3 className="font-semibold text-bark-800 mb-2">Knowledge Investment</h3>
               <p className="text-sm text-bark-600">
                 Your purchase supports our collective wisdom initiative and helps maintain our living library 

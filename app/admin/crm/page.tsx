@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { 
+import {
   Users,
   UserPlus,
   TrendingUp,
@@ -16,10 +16,10 @@ import {
   Phone,
   Building,
   Tag
-} from 'lucide-react'
-import { getCustomers, getLeads, getDeals, getCRMMetrics } from '../../../libs/shared-utils/crm'
-import { Customer, Lead, Deal, CRMMetrics } from '@/libs/shared-utilss/shared-types/crm'
-import PipelineBoard from '../../libs/shared-ui/components/PipelineBoard'
+} from 'feather-icons-react'
+import { getCustomers, getLeads, getDeals, getCRMMetrics } from '@/libs/shared-utils/crm'
+import { Customer, Lead, Deal, CRMMetrics } from '@/libs/shared-types/crm'
+import PipelineBoard from '@/libs/shared-ui/components/PipelineBoard'
 
 export default function CRMDashboard() {
   const [customers, setCustomers] = useState<Customer[]>([])
@@ -59,12 +59,12 @@ export default function CRMDashboard() {
               <Users className="h-8 w-8 text-blue-500" />
               <h1 className="text-xl font-bold">CRM Dashboard</h1>
               <div className="flex items-center space-x-2 ml-8">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 "></div>
                 <span className="text-sm text-gray-300">All systems operational</span>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center space-x-2">
+              <button className="bg-blue-600 text-white px-4 py-2  text-sm font-medium hover:bg-blue-700 flex items-center space-x-2">
                 <UserPlus className="w-4 h-4" />
                 <span>Add Customer</span>
               </button>
@@ -80,7 +80,7 @@ export default function CRMDashboard() {
           <div className="space-y-2 mb-6">
             <button
               onClick={() => setSelectedView('overview')}
-              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center space-x-3 ${
+              className={`w-full text-left px-4 py-3  text-sm font-medium transition-colors flex items-center space-x-3 ${
                 selectedView === 'overview' 
                   ? 'bg-blue-600 text-white' 
                   : 'text-gray-300 hover:bg-dark-700'
@@ -91,7 +91,7 @@ export default function CRMDashboard() {
             </button>
             <button
               onClick={() => setSelectedView('customers')}
-              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center space-x-3 ${
+              className={`w-full text-left px-4 py-3  text-sm font-medium transition-colors flex items-center space-x-3 ${
                 selectedView === 'customers' 
                   ? 'bg-blue-600 text-white' 
                   : 'text-gray-300 hover:bg-dark-700'
@@ -103,7 +103,7 @@ export default function CRMDashboard() {
             </button>
             <button
               onClick={() => setSelectedView('leads')}
-              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center space-x-3 ${
+              className={`w-full text-left px-4 py-3  text-sm font-medium transition-colors flex items-center space-x-3 ${
                 selectedView === 'leads' 
                   ? 'bg-blue-600 text-white' 
                   : 'text-gray-300 hover:bg-dark-700'
@@ -115,7 +115,7 @@ export default function CRMDashboard() {
             </button>
             <button
               onClick={() => setSelectedView('deals')}
-              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center space-x-3 ${
+              className={`w-full text-left px-4 py-3  text-sm font-medium transition-colors flex items-center space-x-3 ${
                 selectedView === 'deals' 
                   ? 'bg-blue-600 text-white' 
                   : 'text-gray-300 hover:bg-dark-700'
@@ -127,7 +127,7 @@ export default function CRMDashboard() {
             </button>
             <button
               onClick={() => setSelectedView('pipeline')}
-              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center space-x-3 ${
+              className={`w-full text-left px-4 py-3  text-sm font-medium transition-colors flex items-center space-x-3 ${
                 selectedView === 'pipeline' 
                   ? 'bg-blue-600 text-white' 
                   : 'text-gray-300 hover:bg-dark-700'
@@ -141,15 +141,15 @@ export default function CRMDashboard() {
           {/* Quick Stats */}
           {metrics && (
             <div className="space-y-4 mb-6">
-              <div className="bg-dark-700 rounded-lg p-4">
+              <div className="bg-dark-700  p-4">
                 <div className="text-2xl font-bold text-green-400">${metrics.totalRevenue.toLocaleString()}</div>
                 <div className="text-sm text-gray-400">Total Revenue</div>
               </div>
-              <div className="bg-dark-700 rounded-lg p-4">
+              <div className="bg-dark-700  p-4">
                 <div className="text-2xl font-bold text-blue-400">{metrics.conversionRate.toFixed(1)}%</div>
                 <div className="text-sm text-gray-400">Conversion Rate</div>
               </div>
-              <div className="bg-dark-700 rounded-lg p-4">
+              <div className="bg-dark-700  p-4">
                 <div className="text-2xl font-bold text-purple-400">${metrics.averageDealSize.toLocaleString()}</div>
                 <div className="text-sm text-gray-400">Avg Deal Size</div>
               </div>
@@ -157,11 +157,11 @@ export default function CRMDashboard() {
           )}
 
           {/* Recent Activity */}
-          <div className="bg-dark-700 rounded-lg p-4">
+          <div className="bg-dark-700  p-4">
             <h3 className="font-semibold mb-4">Recent Activity</h3>
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                <div className="w-2 h-2 bg-green-500  mt-2"></div>
                 <div>
                   <div className="text-sm font-medium">New customer added</div>
                   <div className="text-xs text-gray-400">John Smith - TechCorp Inc.</div>
@@ -169,7 +169,7 @@ export default function CRMDashboard() {
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                <div className="w-2 h-2 bg-blue-500  mt-2"></div>
                 <div>
                   <div className="text-sm font-medium">Deal updated</div>
                   <div className="text-xs text-gray-400">E-commerce Platform - $27K</div>
@@ -177,7 +177,7 @@ export default function CRMDashboard() {
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                <div className="w-2 h-2 bg-yellow-500  mt-2"></div>
                 <div>
                   <div className="text-sm font-medium">Lead qualified</div>
                   <div className="text-xs text-gray-400">Michael Chen - Startup Co</div>
@@ -201,10 +201,10 @@ export default function CRMDashboard() {
                     placeholder={`Search ${selectedView}...`}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="bg-dark-700 border border-dark-600 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-blue-500 w-80"
+                    className="bg-dark-700 border border-dark-600  pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-blue-500 w-80"
                   />
                 </div>
-                <button className="bg-dark-700 border border-dark-600 rounded-lg px-4 py-2 text-sm font-medium hover:bg-dark-600 flex items-center space-x-2">
+                <button className="bg-dark-700 border border-dark-600  px-4 py-2 text-sm font-medium hover:bg-dark-600 flex items-center space-x-2">
                   <Filter className="w-4 h-4" />
                   <span>Filters</span>
                 </button>
@@ -213,13 +213,13 @@ export default function CRMDashboard() {
           )}
 
           {/* Content Area */}
-          <div className="bg-dark-800 rounded-lg p-6 h-full overflow-auto">
+          <div className="bg-dark-800  p-6 h-full overflow-auto">
             {selectedView === 'overview' && (
               <div>
                 <h2 className="text-2xl font-bold mb-6">CRM Overview</h2>
                 {metrics && (
                   <div className="grid grid-cols-4 gap-6 mb-8">
-                    <div className="bg-dark-700 rounded-lg p-6">
+                    <div className="bg-dark-700  p-6">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="font-semibold">Total Customers</h3>
                         <Users className="w-5 h-5 text-blue-500" />
@@ -229,7 +229,7 @@ export default function CRMDashboard() {
                         {metrics.activeCustomers} active
                       </div>
                     </div>
-                    <div className="bg-dark-700 rounded-lg p-6">
+                    <div className="bg-dark-700  p-6">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="font-semibold">Total Leads</h3>
                         <Target className="w-5 h-5 text-green-500" />
@@ -239,7 +239,7 @@ export default function CRMDashboard() {
                         {metrics.qualifiedLeads} qualified
                       </div>
                     </div>
-                    <div className="bg-dark-700 rounded-lg p-6">
+                    <div className="bg-dark-700  p-6">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="font-semibold">Revenue</h3>
                         <DollarSign className="w-5 h-5 text-purple-500" />
@@ -249,7 +249,7 @@ export default function CRMDashboard() {
                         ${metrics.averageDealSize.toLocaleString()} avg deal
                       </div>
                     </div>
-                    <div className="bg-dark-700 rounded-lg p-6">
+                    <div className="bg-dark-700  p-6">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="font-semibold">Win Rate</h3>
                         <TrendingUp className="w-5 h-5 text-yellow-500" />
@@ -273,12 +273,12 @@ export default function CRMDashboard() {
                       key={customer.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-dark-700 rounded-lg p-6 hover:bg-dark-600 transition-colors cursor-pointer"
+                      className="bg-dark-700  p-6 hover:bg-dark-600 transition-colors cursor-pointer"
                       onClick={() => setSelectedCustomer(customer)}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                          <div className="w-12 h-12 bg-blue-600  flex items-center justify-center">
                             <span className="text-lg font-bold">{customer.name.charAt(0)}</span>
                           </div>
                           <div>
@@ -349,11 +349,11 @@ export default function CRMDashboard() {
                       key={lead.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-dark-700 rounded-lg p-6 hover:bg-dark-600 transition-colors"
+                      className="bg-dark-700  p-6 hover:bg-dark-600 transition-colors"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                          <div className="w-12 h-12 bg-green-600  flex items-center justify-center">
                             <span className="text-lg font-bold">{lead.name.charAt(0)}</span>
                           </div>
                           <div>
@@ -413,11 +413,11 @@ export default function CRMDashboard() {
                       key={deal.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-dark-700 rounded-lg p-6 hover:bg-dark-600 transition-colors"
+                      className="bg-dark-700  p-6 hover:bg-dark-600 transition-colors"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                          <div className="w-12 h-12 bg-purple-600  flex items-center justify-center">
                             <DollarSign className="w-6 h-6" />
                           </div>
                           <div>

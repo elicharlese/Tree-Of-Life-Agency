@@ -2,11 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Mail, 
-  ArrowLeft,
-  TreePine
-} from 'lucide-react'
+import { ArrowLeft, Mail, TreePine } from 'lucide-react'
 import Link from 'next/link'
 
 export default function ForgotPassword() {

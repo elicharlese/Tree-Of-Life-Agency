@@ -9,7 +9,7 @@ import {
   CheckCircle,
   Clock,
   User
-} from 'lucide-react'
+} from 'feather-icons-react'
 import { Activity } from '@/libs/shared-types/crm'
 import { getActivities } from '@/lib/crm'
 
@@ -69,10 +69,10 @@ export default function ActivityFeed({ relatedTo, limit = 10 }: ActivityFeedProp
             key={activity.id}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-dark-700 rounded-lg p-4 hover:bg-dark-600 transition-colors"
+            className="bg-dark-700  p-4 hover:bg-dark-600 transition-colors"
           >
             <div className="flex items-start space-x-3">
-              <div className={`p-2 rounded-full bg-dark-600 ${getActivityColor(activity.type)}`}>
+              <div className={`p-2  bg-dark-600 ${getActivityColor(activity.type)}`}>
                 <IconComponent className="w-4 h-4" />
               </div>
               <div className="flex-1">

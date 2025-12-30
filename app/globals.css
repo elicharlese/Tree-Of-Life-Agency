@@ -3,12 +3,62 @@
 @tailwind utilities;
 
 @layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), 'Playfair Display', Georgia, serif;
+  }
+
+  * {
+    border-radius: 0 !important;
+  }
+  
   html {
-    font-family: Inter, system-ui, sans-serif;
+    font-family: var(--font-body), Inter, system-ui, sans-serif;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
   
   body {
+    font-family: var(--font-body), Inter, system-ui, sans-serif;
     @apply text-bark-800 bg-gradient-to-br from-bark-50 via-leaf-50 to-root-50;
+    position: relative;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 Q60 30 50 50 Q40 30 50 10' fill='%233a9b3a' opacity='0.08'/%3E%3Cpath d='M20 40 Q30 60 20 80 Q10 60 20 40' fill='%233a9b3a' opacity='0.08'/%3E%3Cpath d='M80 40 Q90 60 80 80 Q70 60 80 40' fill='%233a9b3a' opacity='0.08'/%3E%3Cpath d='M50 60 Q60 80 50 100 Q40 80 50 60' fill='%232d7d2d' opacity='0.06'/%3E%3Cpath d='M15 15 Q25 35 15 55 Q5 35 15 15' fill='%232d7d2d' opacity='0.06'/%3E%3Cpath d='M85 15 Q95 35 85 55 Q75 35 85 15' fill='%232d7d2d' opacity='0.06'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+  
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -18,43 +68,116 @@
   }
   
   .card-organic {
-    @apply bg-white/95 backdrop-blur-sm rounded-organic shadow-organic border border-bark-200/50 hover:shadow-leaf transition-all duration-300;
+    @apply bg-white/95 backdrop-blur-sm shadow-organic border border-bark-200/50 hover:shadow-leaf transition-all duration-300;
+    border-radius: 8px 0 8px 8px;
+  }
+  
+  .card-color-block {
+    @apply bg-gradient-to-br shadow-lg border-2 transition-all duration-300 hover:shadow-xl;
+  }
+
+  .btn-corner-anim {
+    @apply relative overflow-hidden isolate;
+  }
+
+  .btn-corner-anim::before,
+  .btn-corner-anim::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid currentColor;
+    opacity: 0.28;
+    pointer-events: none;
+    border-radius: 3px;
+    transition: transform 0.45s ease, opacity 0.35s ease;
+  }
+
+  .btn-corner-anim::before {
+    top: -12px;
+    left: -12px;
+    border-right: none;
+    border-bottom: none;
+    animation: btnCornerPulse 3s ease-in-out infinite;
+  }
+
+  .btn-corner-anim::after {
+    bottom: -12px;
+    right: -12px;
+    border-left: none;
+    border-top: none;
+    animation: btnCornerPulse 3s ease-in-out infinite reverse;
+  }
+
+  .btn-corner-anim:hover::before,
+  .btn-corner-anim:hover::after,
+  .btn-corner-anim:focus-visible::before,
+  .btn-corner-anim:focus-visible::after {
+    opacity: 0.75;
+    transform: translate(4px, -4px);
+  }
+
+  @keyframes btnCornerPulse {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(3px, -3px) scale(1.08);
+    }
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
   }
   
   .btn-organic {
-    @apply bg-bark-600 hover:bg-bark-700 text-white font-medium py-3 px-6 rounded-organic transition-all duration-300 shadow-organic hover:shadow-bark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bark-500 transform hover:scale-105;
+    @apply btn-corner-anim bg-bark-600 hover:bg-bark-700 text-white font-medium py-2 px-5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bark-500;
   }
   
   .btn-leaf {
-    @apply bg-leaf-500 hover:bg-leaf-600 text-white font-medium py-3 px-6 rounded-organic transition-all duration-300 shadow-organic hover:shadow-leaf focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 transform hover:scale-105;
+    @apply btn-corner-anim bg-leaf-500 hover:bg-leaf-600 text-white font-medium py-2 px-5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500;
   }
   
   .btn-wisdom {
-    @apply bg-wisdom-500 hover:bg-wisdom-600 text-white font-medium py-3 px-6 rounded-organic transition-all duration-300 shadow-organic hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wisdom-500 transform hover:scale-105;
+    @apply btn-corner-anim bg-wisdom-500 hover:bg-wisdom-600 text-white font-medium py-2 px-5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wisdom-500;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-bark-50 text-bark-700 border border-bark-300 font-medium py-3 px-6 rounded-organic transition-all duration-300 shadow-sm hover:shadow-organic focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bark-500;
+    @apply btn-corner-anim bg-white hover:bg-bark-50 text-bark-700 border border-bark-300 font-medium py-2 px-5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bark-500;
   }
   
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-organic transition-all duration-300 shadow-organic focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transform hover:scale-105;
+    @apply btn-corner-anim bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
   }
-  
+
+  .tag-glass {
+    @apply bg-white/20 border border-white/40 text-bark-700 px-3 py-1 text-xs font-medium;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(16, 24, 16, 0.08);
+    border-radius: 999px;
+  }
+
   .input-organic {
-    @apply bg-white/90 border border-bark-300 rounded-organic py-3 px-4 text-bark-800 placeholder-bark-400 focus:outline-none focus:ring-2 focus:ring-leaf-500 focus:border-leaf-500 shadow-sm transition-all duration-200;
+    @apply bg-white/90 border border-bark-300 py-3 px-4 text-bark-800 placeholder-bark-400 focus:outline-none focus:ring-2 focus:ring-leaf-500 focus:border-leaf-500 shadow-sm transition-all duration-200;
   }
   
   .card {
-    @apply bg-dark-800 border border-dark-700 rounded-organic p-6 hover:border-primary-500 transition-all duration-300;
+    @apply bg-dark-800 border border-dark-700 p-6 hover:border-primary-500 transition-all duration-300;
+  }
+  
+  .modal-glassmorphic {
+    @apply backdrop-blur-md bg-white/60 dark:bg-dark-900/60 border border-bark-200/30 dark:border-dark-700/30 shadow-2xl;
+  }
+  
+  .popout-glassmorphic {
+    @apply backdrop-blur-lg bg-white/50 dark:bg-dark-900/50 border border-bark-200/20 dark:border-dark-700/20 shadow-xl;
   }
   
   .rounded-organic {
-    @apply rounded-2xl;
+    border-radius: 0 !important;
   }
   
   .rounded-branch {
-    @apply rounded-3xl;
+    border-radius: 0 !important;
   }
   
   .shadow-organic {
@@ -63,6 +186,47 @@
   
   .text-gradient {
     @apply bg-gradient-to-r from-leaf-600 to-wisdom-600 bg-clip-text text-transparent;
+  }
+  
+  /* Airbrush 2-tone gradients */
+  .gradient-airbrush-leaf {
+    background: linear-gradient(135deg, #2d7d2d 0%, #1a4d1a 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  .gradient-airbrush-bark {
+    background: linear-gradient(135deg, #8a654a 0%, #5a4334 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  .gradient-airbrush-wisdom {
+    background: linear-gradient(135deg, #eab308 0%, #a16207 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  .gradient-airbrush-root {
+    background: linear-gradient(135deg, #9c7049 0%, #6e4833 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  .gradient-airbrush-dark-leaf {
+    background: linear-gradient(135deg, #1a4d1a 0%, #0f2e0f 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  .gradient-overlay-leaf {
+    background: radial-gradient(circle at top right, rgba(45, 125, 45, 0.3) 0%, transparent 70%),
+                radial-gradient(circle at bottom left, rgba(26, 77, 26, 0.3) 0%, transparent 70%);
+  }
+  
+  .gradient-overlay-bark {
+    background: radial-gradient(circle at top left, rgba(138, 101, 74, 0.3) 0%, transparent 70%),
+                radial-gradient(circle at bottom right, rgba(90, 67, 52, 0.3) 0%, transparent 70%);
   }
 }
 
@@ -97,4 +261,10 @@
 @keyframes wisdomGlow {
   0% { box-shadow: 0 0 5px rgba(234, 179, 8, 0.3); }
   100% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.6); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

@@ -9,7 +9,7 @@ import {
   MoreVertical,
   Plus,
   Target
-} from 'lucide-react'
+} from 'feather-icons-react'
 import { Deal } from '@/libs/shared-types/crm'
 import { getPipelineData } from '@/lib/crm'
 
@@ -73,7 +73,7 @@ export default function PipelineBoard({ onDealUpdate }: PipelineBoardProps) {
         {pipelineData.map((stageData) => (
           <div
             key={stageData.stage}
-            className="w-80 bg-dark-700 rounded-lg"
+            className="w-80 bg-dark-700 "
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, stageData.stage)}
           >
@@ -81,7 +81,7 @@ export default function PipelineBoard({ onDealUpdate }: PipelineBoardProps) {
             <div className="p-4 border-b border-dark-600">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
-                  <div className={`w-3 h-3 rounded-full ${getStageColor(stageData.stage)}`}></div>
+                  <div className={`w-3 h-3  ${getStageColor(stageData.stage)}`}></div>
                   <h3 className="font-semibold">{getStageTitle(stageData.stage)}</h3>
                   <span className="bg-dark-600 px-2 py-1 rounded text-xs">{stageData.count}</span>
                 </div>
@@ -106,7 +106,7 @@ export default function PipelineBoard({ onDealUpdate }: PipelineBoardProps) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
                     whileHover={{ scale: 1.02 }}
-                    className={`bg-dark-600 rounded-lg p-4 cursor-grab active:cursor-grabbing border-l-4 ${getStageColor(deal.stage)} ${
+                    className={`bg-dark-600  p-4 cursor-grab active:cursor-grabbing border-l-4 ${getStageColor(deal.stage)} ${
                       draggedDeal?.id === deal.id ? 'opacity-50' : ''
                     }`}
                     draggable

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, CheckCircle, Info, XCircle, X } from 'lucide-react';
+import { AlertCircle, CheckCircle, Info, XCircle, X } from 'feather-icons-react';
 
 interface AlertProps {
   variant?: 'info' | 'success' | 'warning' | 'error';
@@ -42,7 +42,7 @@ const Alert: React.FC<AlertProps> = ({
   const styles = variantStyles[variant];
 
   return (
-    <div className={`border rounded-lg p-4 ${styles.container} ${className}`}>
+    <div className={`border p-4 ${styles.container} ${className}`}>
       <div className="flex items-start space-x-3">
         <div className="flex-shrink-0">
           {styles.icon}
@@ -63,7 +63,7 @@ const Alert: React.FC<AlertProps> = ({
           <div className="flex-shrink-0">
             <button
               onClick={onClose}
-              className={`inline-flex rounded-md p-1.5 hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+              className={`inline-flex p-1.5 hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                 variant === 'info' ? 'text-blue-500 hover:bg-blue-600 focus:ring-blue-500' :
                 variant === 'success' ? 'text-green-500 hover:bg-green-600 focus:ring-green-500' :
                 variant === 'warning' ? 'text-yellow-500 hover:bg-yellow-600 focus:ring-yellow-500' :

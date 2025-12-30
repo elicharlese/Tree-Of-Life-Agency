@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'feather-icons-react'
 
 export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   variant?: 'default' | 'organic'
@@ -17,7 +17,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       <div className="relative">
         <select
           className={cn(
-            'flex h-10 w-full rounded-md border bg-white px-3 py-2 pr-10 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none',
+            'flex h-10 w-full border bg-white px-3 py-2 pr-10 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none',
             variants[variant],
             className
           )}

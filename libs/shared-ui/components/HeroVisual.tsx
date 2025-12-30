@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { TreePine, Users, Code, Smartphone, Palette, Server } from 'lucide-react'
+import { TreePine, Users, Code, Smartphone, Palette, Server } from 'feather-icons-react'
 
 const services = [
   { icon: Code, label: 'Frontend', color: 'text-leaf-600', delay: 0.1, href: '/services/frontend' },
@@ -49,9 +49,9 @@ export default function HeroVisual() {
       onMouseLeave={handleMouseLeave}
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-leaf-100/30 via-bark-50/30 to-root-100/30 rounded-organic" />
+      <div className="absolute inset-0 bg-gradient-to-br from-leaf-100/30 via-bark-50/30 to-root-100/30 " />
       {/* Soft vignette */}
-      <div className="pointer-events-none absolute inset-0 rounded-organic" style={{
+      <div className="pointer-events-none absolute inset-0 " style={{
         background: 'radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,0.0) 0%, rgba(20,90,50,0.05) 70%, rgba(20,90,50,0.12) 100%)'
       }} />
       
@@ -66,7 +66,7 @@ export default function HeroVisual() {
         style={{ transform: `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)` }}
       >
         <Link href={displayItems[active].href} className="inline-flex flex-col items-center group">
-          <span className="bg-white/80 backdrop-blur-md rounded-full p-6 shadow-organic/50 group-hover:shadow-leaf transition-all duration-300">
+          <span className="bg-white/80 backdrop-blur-md  p-6 shadow-organic/50 group-hover:shadow-leaf transition-all duration-300">
             {(() => {
               const Icon = displayItems[active].icon
               return <Icon className={`h-12 w-12 ${displayItems[active].color}`} />
@@ -106,10 +106,10 @@ export default function HeroVisual() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 1.1, ease: 'easeOut' }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center bg-white/60 backdrop-blur-xl rounded-2xl px-5 py-3 shadow-organic border border-white/50"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center bg-white/60 backdrop-blur-xl  px-5 py-3 shadow-organic border border-white/50"
       >
         <div className="flex items-center justify-center gap-2">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-leaf-100">
+          <span className="inline-flex h-6 w-6 items-center justify-center  bg-leaf-100">
             <Users className="h-4 w-4 text-leaf-700" />
           </span>
           <span className="text-sm font-semibold text-bark-800">Family Network</span>

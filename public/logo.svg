@@ -1,0 +1,36 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laptop base (curved bottom) -->
+  <path d="M 40 400 L 460 400 C 475 400 485 410 485 425 L 485 435 C 485 445 475 455 460 455 L 40 455 C 25 455 15 445 15 435 L 15 425 C 15 410 25 400 40 400 Z" fill="#1a4d1a"/>
+  
+  <!-- Laptop screen frame (green rectangle) -->
+  <rect x="60" y="190" width="380" height="210" rx="8" fill="#1a4d1a"/>
+  
+  <!-- Laptop screen white inner border -->
+  <rect x="75" y="205" width="350" height="180" rx="5" fill="#fff"/>
+  
+  <!-- Laptop screen green display area -->
+  <rect x="90" y="220" width="320" height="150" fill="#236323"/>
+  
+  <!-- Keyboard/touchpad white rectangle -->
+  <rect x="195" y="405" width="110" height="30" rx="5" fill="#fff"/>
+  
+  <!-- Tree trunk - vertical white line -->
+  <rect x="245" y="50" width="10" height="315" fill="#fff"/>
+  
+  <!-- Top leaf (right side) - teardrop shape -->
+  <ellipse cx="285" cy="75" rx="35" ry="50" fill="#1a4d1a" transform="rotate(25 285 75)"/>
+  
+  <!-- Second leaf (left side) - teardrop shape -->
+  <ellipse cx="215" cy="125" rx="40" ry="55" fill="#236323" transform="rotate(-25 215 125)"/>
+  
+  <!-- Third leaf (left side on screen) - teardrop shape -->
+  <ellipse cx="205" cy="200" rx="30" ry="40" fill="#1a4d1a" transform="rotate(-30 205 200)"/>
+  
+  <!-- Fourth leaf (right side on screen) - teardrop shape with white outline -->
+  <ellipse cx="295" cy="270" rx="35" ry="45" fill="#236323" transform="rotate(30 295 270)"/>
+  <ellipse cx="295" cy="270" rx="28" ry="38" fill="none" stroke="#fff" stroke-width="6" transform="rotate(30 295 270)"/>
+  
+  <!-- Root system - bottom curved arcs -->
+  <path d="M 175 340 Q 250 380 325 340" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <ellipse cx="250" cy="360" rx="60" ry="30" fill="none" stroke="#fff" stroke-width="8"/>
+</svg>

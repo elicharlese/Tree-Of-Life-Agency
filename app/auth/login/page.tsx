@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff, LogIn, AlertCircle } from 'feather-icons-react';
 
 interface LoginFormData {
   email: string;
@@ -93,10 +93,10 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
       <div className="max-w-md w-full space-y-8">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white  shadow-xl p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="mx-auto h-12 w-12 bg-indigo-600 rounded-full flex items-center justify-center mb-4">
+            <div className="mx-auto h-12 w-12 bg-indigo-600  flex items-center justify-center mb-4">
               <LogIn className="h-6 w-6 text-white" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
@@ -105,7 +105,7 @@ export default function LoginPage() {
 
           {/* Error Alert */}
           {error && (
-            <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-3">
+            <div className="mb-6 bg-red-50 border border-red-200  p-4 flex items-center space-x-3">
               <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
               <p className="text-red-700 text-sm">{error}</p>
             </div>
@@ -125,7 +125,7 @@ export default function LoginPage() {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 border border-gray-300  focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
                 placeholder="Enter your email"
               />
             </div>
@@ -143,7 +143,7 @@ export default function LoginPage() {
                   required
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 pr-12 border border-gray-300  focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
                   placeholder="Enter your password"
                 />
                 <button
@@ -184,11 +184,11 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full flex justify-center py-3 px-4 border border-transparent  shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isLoading ? (
                 <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  <div className="animate-spin  h-4 w-4 border-b-2 border-white"></div>
                   <span>Signing in...</span>
                 </div>
               ) : (

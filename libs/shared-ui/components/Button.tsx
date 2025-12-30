@@ -25,21 +25,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseClasses =
+      'inline-flex items-center justify-center font-medium uppercase tracking-wide transition-all duration-200 rounded-none focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
     const variantClasses = {
-      primary: 'bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500',
-      secondary: 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500',
-      outline: 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-indigo-500',
-      ghost: 'text-gray-700 hover:bg-gray-100 focus:ring-gray-500',
+      primary: 'bg-leaf-600 text-white hover:bg-leaf-700 focus:ring-leaf-500 shadow-organic',
+      secondary: 'bg-bark-700 text-white hover:bg-bark-800 focus:ring-bark-500 shadow-organic',
+      outline: 'border border-bark-400 bg-transparent text-bark-800 hover:bg-bark-50 focus:ring-bark-400',
+      ghost: 'text-bark-700 hover:bg-bark-100 focus:ring-bark-400',
       danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-    };
+    } as const;
 
     const sizeClasses = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-4 py-2 text-sm',
-      lg: 'px-6 py-3 text-base',
-    };
+      sm: 'px-3 py-1 text-xs',
+      md: 'px-4 py-1.5 text-sm',
+      lg: 'px-5 py-2 text-base',
+    } as const;
 
     const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 

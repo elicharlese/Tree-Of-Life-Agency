@@ -3,16 +3,17 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { 
-  BookOpen, 
-  Users, 
-  TreePine, 
-  Leaf, 
-  Shield, 
-  Zap,
-  ChevronRight
-} from 'lucide-react'
-
+import {
+  ReaderIcon,
+  GroupIcon,
+  SunIcon,
+  LockClosedIcon,
+  LightningBoltIcon,
+  ChevronRightIcon,
+  MagicWandIcon,
+  StarIcon
+} from '@radix-ui/react-icons'
+import { Logo } from '../libs/shared-ui/components'
 import HeroVisual from '../components/HeroVisual'
 
 export default function Home() {
@@ -20,32 +21,27 @@ export default function Home() {
   
   const features = [
     {
-      icon: BookOpen,
+      icon: ReaderIcon,
       title: 'Living Library',
       description: 'Access our collective knowledge base with interactive tree branches'
     },
     {
-      icon: Users,
+      icon: GroupIcon,
       title: 'Collaborative Wisdom',
       description: 'Connect with experts across different specialties'
     },
     {
-      icon: TreePine,
-      title: 'Organic Growth',
-      description: 'Watch your skills and knowledge expand like tree branches'
-    },
-    {
-      icon: Leaf,
+      icon: SunIcon,
       title: 'Sustainable Practices',
       description: 'Learn and grow with nature-inspired design principles'
     },
     {
-      icon: Shield,
+      icon: LockClosedIcon,
       title: 'Secure Access',
       description: 'Protected knowledge sharing within our community'
     },
     {
-      icon: Zap,
+      icon: LightningBoltIcon,
       title: 'Instant Insights',
       description: 'Get real-time access to curated expertise'
     }
@@ -57,16 +53,13 @@ export default function Home() {
       <nav className="nav-organic">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <TreePine className="h-8 w-8 text-leaf-500" />
-              <span className="ml-2 text-xl font-bold text-bark-800">Tree of Life Agency</span>
-            </div>
+            <Logo size="sm" showText={true} href="/" />
             <div className="hidden md:block">
               <div className="ml-10 flex items-center space-x-4">
-                <Link href="/library" className="text-bark-600 hover:text-leaf-600 px-3 py-2 rounded-md text-sm font-medium">Library</Link>
-                <Link href="/services" className="text-bark-600 hover:text-leaf-600 px-3 py-2 rounded-md text-sm font-medium">Services</Link>
-                <Link href="/collective" className="text-bark-600 hover:text-leaf-600 px-3 py-2 rounded-md text-sm font-medium">Collective</Link>
-                <Link href="/wisdom" className="text-bark-600 hover:text-leaf-600 px-3 py-2 rounded-md text-sm font-medium">Wisdom</Link>
+                <Link href="/library" className="text-bark-600 hover:text-leaf-600 px-3 py-2  text-sm font-medium">Library</Link>
+                <Link href="/services" className="text-bark-600 hover:text-leaf-600 px-3 py-2  text-sm font-medium">Services</Link>
+                <Link href="/collective" className="text-bark-600 hover:text-leaf-600 px-3 py-2  text-sm font-medium">Collective</Link>
+                <Link href="/wisdom" className="text-bark-600 hover:text-leaf-600 px-3 py-2  text-sm font-medium">Wisdom</Link>
                 <Link href="/auth/signin" className="btn-organic">Sign In</Link>
                 <Link href="/auth/signup" className="btn-leaf">Join Collective</Link>
               </div>
@@ -74,7 +67,7 @@ export default function Home() {
             <div className="md:hidden">
               <button 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-bark-600 hover:text-leaf-600 focus:outline-none"
+                className="inline-flex items-center justify-center p-2  text-bark-600 hover:text-leaf-600 focus:outline-none"
               >
                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                   {isMenuOpen ? (
@@ -92,10 +85,10 @@ export default function Home() {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link href="/library" className="text-bark-600 hover:text-leaf-600 block px-3 py-2 rounded-md text-base font-medium">Library</Link>
-              <Link href="/services" className="text-bark-600 hover:text-leaf-600 block px-3 py-2 rounded-md text-base font-medium">Services</Link>
-              <Link href="/collective" className="text-bark-600 hover:text-leaf-600 block px-3 py-2 rounded-md text-base font-medium">Collective</Link>
-              <Link href="/wisdom" className="text-bark-600 hover:text-leaf-600 block px-3 py-2 rounded-md text-base font-medium">Wisdom</Link>
+              <Link href="/library" className="text-bark-600 hover:text-leaf-600 block px-3 py-2  text-base font-medium">Library</Link>
+              <Link href="/services" className="text-bark-600 hover:text-leaf-600 block px-3 py-2  text-base font-medium">Services</Link>
+              <Link href="/collective" className="text-bark-600 hover:text-leaf-600 block px-3 py-2  text-base font-medium">Collective</Link>
+              <Link href="/wisdom" className="text-bark-600 hover:text-leaf-600 block px-3 py-2  text-base font-medium">Wisdom</Link>
               <div className="flex space-x-2 px-3 py-2">
                 <Link href="/auth/signin" className="btn-organic w-1/2">Sign In</Link>
                 <Link href="/auth/signup" className="btn-leaf w-1/2">Join</Link>
@@ -142,13 +135,13 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
             >
-              <Link href="/order" className="btn-organic flex items-center justify-center">
-                Start Your Project
-                <ChevronRight className="ml-2 h-5 w-5" />
+              <Link href="/order" className="btn-organic flex items-center justify-center space-x-2">
+                <MagicWandIcon className="h-5 w-5" />
+                <span>Start Your Project</span>
               </Link>
-              <Link href="/collective" className="btn-leaf flex items-center justify-center">
-                Meet Our Family
-                <Users className="ml-2 h-5 w-5" />
+              <Link href="/collective" className="btn-leaf flex items-center justify-center space-x-2">
+                <StarIcon className="h-5 w-5" />
+                <span>Meet Our Family</span>
               </Link>
             </motion.div>
           </div>
@@ -198,7 +191,7 @@ export default function Home() {
 
       {/* Access Levels Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-gradient-to-r from-bark-500 to-root-600 rounded-branch shadow-organic p-8 md:p-12">
+        <div className="bg-gradient-to-r from-bark-500 to-root-600  shadow-organic p-8 md:p-12">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-serif text-white mb-4">Branch Into Knowledge</h2>
             <p className="text-bark-100 max-w-2xl mx-auto">
@@ -207,27 +200,29 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-organic p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm  p-6 border border-white/20">
               <div className="text-center">
-                <Leaf className="h-12 w-12 text-leaf-300 mx-auto mb-4" />
+                <MagicWandIcon className="h-12 w-12 text-leaf-200 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Seedling Access</h3>
                 <p className="text-bark-100 mb-4">Begin your journey with basic knowledge sharing</p>
                 <Link href="/access/seedling" className="btn-leaf w-full block text-center">Start Growing</Link>
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-organic p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm  p-6 border border-white/20">
               <div className="text-center">
-                <TreePine className="h-12 w-12 text-wisdom-300 mx-auto mb-4" />
+                <div className="flex justify-center mb-4">
+                  <Logo size="lg" showText={false} href={null} />
+                </div>
                 <h3 className="text-xl font-semibold text-white mb-2">Branch Member</h3>
                 <p className="text-bark-100 mb-4">Full access to our collaborative knowledge base</p>
                 <Link href="/access/branch-member" className="btn-wisdom w-full block text-center">Join Branch</Link>
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-organic p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm  p-6 border border-white/20">
               <div className="text-center">
-                <Shield className="h-12 w-12 text-wisdom-200 mx-auto mb-4" />
+                <StarIcon className="h-12 w-12 text-wisdom-200 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Elder Tree</h3>
                 <p className="text-bark-100 mb-4">Advanced insights and leadership opportunities</p>
                 <Link href="/access/elder-tree" className="btn-organic w-full block text-center">Ascend</Link>
@@ -238,15 +233,13 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-bark-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <footer className="gradient-airbrush-bark text-white relative overflow-hidden">
+        <div className="gradient-overlay-bark absolute inset-0 opacity-20"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
           <div className="grid md:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="col-span-1">
-              <div className="flex items-center mb-4">
-                <TreePine className="h-8 w-8 text-leaf-400 mr-2" />
-                <span className="text-xl font-bold">Tree of Life Agency</span>
-              </div>
+              <Logo size="sm" showText={true} href={null} className="mb-4" textClassName="text-white" />
               <p className="text-bark-300 mb-4">
                 A family of specialists delivering comprehensive development services with organic collaboration.
               </p>
